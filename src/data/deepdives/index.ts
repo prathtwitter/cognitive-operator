@@ -1,6 +1,9 @@
 import type { Concept, DeepDive, SphereId } from '../../types/curriculum';
+import { CONCEPTS_WITH_DEEP_DIVE } from './registry';
 
 type DeepDiveMap = Record<string, DeepDive>;
+
+export { CONCEPTS_WITH_DEEP_DIVE };
 
 /**
  * Deep dives are long-form prose — roughly an order of magnitude more text than the
@@ -13,17 +16,6 @@ const LOADERS: Record<SphereId, () => Promise<DeepDiveMap>> = {
   'strategic-interactions': () => import('./sphere3').then((m) => m.SPHERE_3_DEEP_DIVES),
   'behavioral-economics': () => import('./sphere4').then((m) => m.SPHERE_4_DEEP_DIVES),
 };
-
-/**
- * Concepts that actually have a written deep dive.
- *
- * Kept explicit so the UI can decide whether to promise a read without first
- * downloading a large chunk. `tests/deep-dives.test.ts` asserts this stays in sync
- * with the real chunk contents, so it can never silently drift.
- */
-export const CONCEPTS_WITH_DEEP_DIVE: ReadonlySet<string> = new Set([
-  'dual-process-miserliness',
-]);
 
 export function hasDeepDive(concept: Concept): boolean {
   return CONCEPTS_WITH_DEEP_DIVE.has(concept.id);
