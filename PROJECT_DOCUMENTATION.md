@@ -1,10 +1,11 @@
 # COGNITIVE OPERATOR
 ### Comprehensive Project Documentation & Architectural Field Manual
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Repository:** [https://github.com/prathtwitter/cognitive-operator](https://github.com/prathtwitter/cognitive-operator)  
-**Live Production URL:** [https://prathtwitter.github.io/cognitive-operator/](https://prathtwitter.github.io/cognitive-operator/)  
-**Deployment Target:** GitHub Pages / Vercel Edge  
+**Live Production URL (primary):** [https://cognitive-operator-prath.vercel.app/](https://cognitive-operator-prath.vercel.app/)  
+**Mirror:** [https://prathtwitter.github.io/cognitive-operator/](https://prathtwitter.github.io/cognitive-operator/)  
+**Deployment Target:** Vercel Edge (primary) / GitHub Pages (CI mirror)  
 **Date:** September 2026  
 
 ---
@@ -19,7 +20,7 @@ Unlike standard pop-psychology literature that relies on vague anecdotes, Cognit
 * **Zero Academic Fluff:** Every concept is paired with an everyday mental model analogy, concrete human behavior triggers, and verbatim conversational weaponry.
 * **Rapid Tactical Retrieval:** Designed for use before or during high-stakes interactions (boardroom meetings, contract negotiations, conflict de-escalation).
 * **High-Signal Grounding:** Direct access to curated lectures, Nobel prize papers, and landmark monographs (<45 minutes each), completely bypassing 300-page business books.
-* **Offline & Mobile Ergonomics:** Zero-latency client-side execution, PWA standalone installation on iOS and Android, and complete local persistence without mandatory user accounts.
+* **Offline & Mobile Ergonomics:** Zero-latency client-side execution, PWA standalone installation on iOS and Android, and complete local persistence without mandatory user accounts. A service worker precaches the shell and hashed assets, so a cold launch with no network still boots the full curriculum — verified end-to-end in headless Chrome with the network cut (see §9).
 
 ---
 
@@ -57,11 +58,14 @@ Unlike standard pop-psychology literature that relies on vague anecdotes, Cognit
   * Card Border Accent (`#222634`)
   * Sphere Chromas: Cyan (Sphere 1), Purple (Sphere 2), Amber (Sphere 3), Emerald (Sphere 4).
 * **PWA & Mobile Optimization:**
-  * Standalone Display Mode (`manifest.webmanifest`)
-  * Dynamic Island / Notch safe-area padding (`pb-safe`, `pt-safe`)
-  * Apple Touch Icons & Web App meta tags (`apple-mobile-web-app-capable`).
+  * Standalone Display Mode (`manifest.webmanifest`), with **relative** `start_url`/`scope`/icon paths so a single build installs correctly at a root domain *and* under a project subpath.
+  * **Service worker** (`public/sw.js`, no build plugin): network-first for navigations (new deploys land on the next online launch), cache-first for content-hashed `/assets/*`, stale-while-revalidate for icons and the manifest. Bump `CACHE_VERSION` to evict everything.
+  * Real PNG icon set rasterized from `icon.svg` — `apple-touch-icon.png` (180², full-bleed so iOS applies its own mask), `icon-192/512.png` (`purpose: any`), `maskable-512.png` (artwork inside the 80% safe zone). SVG-only icons do not render as an iOS home-screen icon.
+  * Dynamic Island / Notch safe-area padding (`pb-safe`, `pt-safe`).
+  * Pinch-zoom is **not** disabled (WCAG 1.4.4).
+* **Routing:** Dependency-free hash router (`src/lib/router.ts`) over `useSyncExternalStore`. Hash-based by design — no server rewrite rules on either host, and the service worker scope is always the app root.
 * **Icons:** `lucide-react` (featherweight SVG icon library).
-* **State & Persistence:** React Context API backed by zero-dependency `localStorage` syncing for bookmarks, mastered flags, and scenario quiz scores.
+* **State & Persistence:** React Context API backed by zero-dependency `localStorage` syncing for bookmarks, mastered flags, and scenario quiz scores. Only this app's three `cog_operator_*_v1` keys are ever written or cleared.
 
 ---
 
@@ -150,6 +154,7 @@ Incentive gaming, intertemporal choice, friction, and systemic irrationality.
   * Thinkers pills
   * Quick-weapon preview with 1-click clipboard copy
   * Bookmark and Mastered toggle states.
+  * The whole card is mouse-clickable; keyboard users get a real focusable "Read Full Breakdown" button (the card cannot itself be a `<button>` without illegally nesting the bookmark/mastery controls).
 
 ### B. Field Weaponry Matrix ("In the Arena") (`activeTab === 'weaponry'`)
 * Designed for emergency lookup immediately before a negotiation or during a recess.
@@ -176,6 +181,22 @@ Incentive gaming, intertemporal choice, friction, and systemic irrationality.
 
 ### E. Global Omnibar Search (`⌘K` / `Ctrl+K`)
 * Instant modal search indexing titles, taglines, thinkers, definitions, phrases, and tags with zero network latency.
+* `Enter` jumps straight to the top result; `Esc` or a backdrop click dismisses.
+
+### F. Deep Links & Shareable URLs
+Every view is addressable, so a concept can be texted to yourself before a meeting and the Android back gesture behaves.
+
+| URL | Opens |
+|-----|-------|
+| `#/` | Curriculum |
+| `#/?sphere=social-dynamics&difficulty=Lethal` | Curriculum, pre-filtered |
+| `#/arena?tag=Negotiation&q=deadlock` | Field Weaponry, pre-filtered and pre-searched |
+| `#/lab` | Scenario Lab |
+| `#/vault` | Mastery Vault |
+| `#/c/23` | Concept #23 (short share form — the number matches the `#23` badge in the UI) |
+| `#/arena?tag=Crisis&c=26` | Concept #26 open *over* the filtered Arena |
+
+**History semantics.** Opening a concept and switching tabs push history entries; filter and search changes replace (so filtering never floods the back stack, and search is debounced 250 ms before it reaches the URL). Paging prev/next inside the modal replaces, so closing after browsing ten concepts takes one Back, not ten. The close button uses a real history step when this app pushed the entry, and falls back to a replace on a cold deep link so it can never navigate off the site.
 
 ---
 
@@ -197,13 +218,26 @@ npm run dev
 npm run build
 ```
 
+### Scripts
+
+| Script | Does |
+|--------|------|
+| `npm run dev` | Vite dev server on port **5173**, bound to `0.0.0.0` for phone testing |
+| `npm run build` | `tsc -b` across all three TS projects, then the Vite production build |
+| `npm run preview` | Serve `dist/` (the only way to exercise the service worker locally) |
+| `npm run lint` | oxlint |
+| `npm run typecheck` | `tsc -b` only |
+| `npm test` | Vitest — data-integrity and router suites |
+| `npm run verify` | lint → typecheck → test, the same gate CI runs |
+
 ### Accessing on Mobile Devices
 The development server automatically binds to `0.0.0.0`, allowing instant phone testing:
 1. Ensure your smartphone is connected to the same Wi-Fi network as your development machine.
 2. Open Safari (iOS) or Chrome (Android) and enter:
    ```text
-   http://10.0.0.188:5174
+   http://<your-lan-ip>:5173
    ```
+   Note: over plain `http` the browser withholds `navigator.clipboard`, so every "Copy" button falls back to a legacy `execCommand` path and reports honestly if even that is refused. The service worker does **not** register over `http` (it needs a secure context) — install and offline testing must happen against an HTTPS deploy or `localhost`.
 3. **PWA Standalone Installation:**
    * **iOS Safari:** Tap the **Share** button $\rightarrow$ Select **"Add to Home Screen"**.
    * **Android Chrome:** Tap the **Three Dots** $\rightarrow$ Select **"Install App"**.
@@ -212,15 +246,21 @@ The development server automatically binds to `0.0.0.0`, allowing instant phone 
 
 ## 6. Cloud Deployment Architecture
 
-### Deployment 1: GitHub Pages (Live via Automated CI)
-* **Live Production URL:** [https://prathtwitter.github.io/cognitive-operator/](https://prathtwitter.github.io/cognitive-operator/)
-* **Configuration:** Built via `.github/workflows/deploy.yml` on every push to the `master` branch.
-* **Vite Config:** Configured with `base: './'` for universal asset path resolution across root domains and subpaths.
+### Deployment 1: Vercel — **primary**
+* **Live URL:** [https://cognitive-operator-prath.vercel.app/](https://cognitive-operator-prath.vercel.app/)
+* **Config:** `vercel.json` defines framework (`vite`), build command (`npm run build`), and output directory (`dist`).
+* Root-domain hosting, HTTPS with HSTS — the install/offline target.
 
-### Deployment 2: Vercel (1-Click Edge Deployment)
-* **Pre-configured:** `vercel.json` defines framework (`vite`), build command (`npm run build`), and output directory (`dist`).
-* **1-Click Import Link:**
-  [https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fprathtwitter%2Fcognitive-operator](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fprathtwitter%2Fcognitive-operator)
+### Deployment 2: GitHub Pages — CI mirror
+* **URL:** [https://prathtwitter.github.io/cognitive-operator/](https://prathtwitter.github.io/cognitive-operator/)
+* **Config:** `.github/workflows/deploy.yml` — lint/typecheck/test must pass before build, and only non-PR pushes to `master` deploy.
+* Served from the `/cognitive-operator/` subpath. This used to break PWA install because `manifest.webmanifest` is copied verbatim from `public/` (Vite rewrites paths in `index.html`, **not** inside JSON), so its absolute `/icon.svg` and `start_url: "/"` 404'd. Both are now relative, which resolves correctly on either host.
+
+### Path resolution rules (both hosts)
+* `vite.config.ts` sets `base: './'`.
+* `index.html` may use `/`-prefixed asset paths — Vite rewrites them at build time.
+* `public/manifest.webmanifest` and anything else in `public/` must use `./`-relative paths — Vite does **not** rewrite these.
+* The service worker resolves its own URL from `import.meta.env.BASE_URL` against the document URL, so its scope is correct on both hosts.
 
 ---
 
@@ -285,9 +325,25 @@ export interface Concept {
 
 ## 8. Maintenance & Extensibility
 
-* **Adding New Models:** Add new objects conforming to `Concept` inside `src/data/sphere1.ts` through `sphere4.ts`. The aggregated indexes in `src/data/index.ts` automatically re-index search, filters, and count badges.
+* **Adding New Models:** Add new objects conforming to `Concept` inside `src/data/sphere1.ts` through `sphere4.ts`. The aggregated indexes in `src/data/index.ts` automatically re-index search, filters, and count badges. Also bump the owning sphere's `conceptsCount` in `src/data/spheres.ts` — a test enforces that it matches reality.
 * **Adding New Scenarios:** Add new entries to `SCENARIOS` in `src/data/scenarios.ts`.
 * **Exporting / Backing Up Notes:** Future updates can wire export functionality to dump `localStorage` state into a downloadable JSON file.
+* **Share links are index-based** (`#/c/23`). Appending concepts is safe; renumbering existing ones breaks previously shared links. Slug ids also resolve (`#/c/dual-process-miserliness`), so a renumber can be survived by sharing slugs instead.
+
+---
+
+## 9. Quality Gates
+
+`npm run verify` (and CI, before any deploy) runs:
+
+| Gate | Covers |
+|------|--------|
+| `oxlint` | React hook rules, `react-refresh` component-export boundary |
+| `tsc -b` | Three TS projects: `src`, `vite.config.ts`, `tests` |
+| Vitest — `tests/data-integrity.test.ts` | 40 concepts, unique ids, contiguous `globalIndex`, per-sphere numbering, `conceptsCount` accuracy, ≥2 weapons per concept, valid context tags and difficulties, every `highSignalSource.url` present and `https://`, every scenario `conceptId` resolvable, exactly one correct option per scenario, concept lookup by index and slug |
+| Vitest — `tests/router.test.ts` | Hash parsing/building, filter scoping per tab, junk-value fallbacks, round-trip stability |
+
+**PWA verification is not in CI.** Service workers need a real browser, so offline behavior was verified out-of-band by driving headless Chrome over the DevTools Protocol: register → take control → populate cache → cut the network → cold-load `#/c/23` and confirm the app boots and the deep link resolves (10/10 checks). Re-run that harness manually after touching `public/sw.js` or `src/lib/registerSW.ts`.
 
 ---
 
