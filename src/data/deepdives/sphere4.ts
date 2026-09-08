@@ -1,5 +1,10 @@
 import type { DeepDive } from '../../types/curriculum';
+import { deepDive as choiceArchitectureDefaultMechanics } from './concepts/choice-architecture-default-mechanics';
 import { deepDive as decisionFatigueDepletionTraps } from './concepts/decision-fatigue-depletion-traps';
+import { deepDive as dopaminergicPredictionErrorVariableSchedules } from './concepts/dopaminergic-prediction-error-variable-schedules';
+import { deepDive as endowmentEffectDivestitureAversion } from './concepts/endowment-effect-divestiture-aversion';
+import { deepDive as goodhartsCampbellsLaws } from './concepts/goodharts-campbells-laws';
+import { deepDive as hyperbolicDiscountingPresentBias } from './concepts/hyperbolic-discounting-present-bias';
 import { deepDive as sunkCostFallacyEscalationOfCommitment } from './concepts/sunk-cost-fallacy-escalation-of-commitment';
 
 /**
@@ -10,6 +15,11 @@ import { deepDive as sunkCostFallacyEscalationOfCommitment } from './concepts/su
  * Add a file under `./concepts/` and re-run the script instead.
  */
 export const SPHERE_4_DEEP_DIVES: Record<string, DeepDive> = {
+  'choice-architecture-default-mechanics': choiceArchitectureDefaultMechanics,
   'decision-fatigue-depletion-traps': decisionFatigueDepletionTraps,
+  'dopaminergic-prediction-error-variable-schedules': dopaminergicPredictionErrorVariableSchedules,
+  'endowment-effect-divestiture-aversion': endowmentEffectDivestitureAversion,
+  'goodharts-campbells-laws': goodhartsCampbellsLaws,
+  'hyperbolic-discounting-present-bias': hyperbolicDiscountingPresentBias,
   'sunk-cost-fallacy-escalation-of-commitment': sunkCostFallacyEscalationOfCommitment,
 };
