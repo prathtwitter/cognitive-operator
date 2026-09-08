@@ -65,14 +65,14 @@ export const SPHERE_4_CONCEPTS: Concept[] = [
     numberInSphere: 2,
     globalIndex: 32,
     title: 'Choice Architecture & Default Mechanics',
-    tagline: 'People don\'t make choices; they take the default. Whoever controls the pre-selected checkbox controls 80% of human behavior.',
+    tagline: 'People often don\'t choose; they take the default. Whoever sets the pre-selected checkbox decides the outcome for everyone without a strong preference.',
     plainEnglishAnalogy: 'The Pre-Checked Subscription Box',
     everydayHumanBehavior: 'Why do you pay $14.99 every month for a streaming subscription you haven\'t opened in six months? Because when you signed up for the free trial, the default setting was "Auto-Renew Every Month." Canceling requires logging in, finding the settings, and clicking four confirmation screens. Doing nothing requires zero effort. Humans almost always do whatever happens when they do nothing.',
     formalTerminology: {
       primaryTerm: 'Choice Architecture & Default Effects',
       subConstructs: ['Nudge Theory', 'Opt-In vs Opt-Out Equilibrium', 'Status Quo Inertia'],
       keyThinkers: ['Richard Thaler', 'Cass Sunstein', 'Eric Johnson'],
-      definition: 'The deliberate design of the environment in which people make decisions. The Default Effect is the tendency for decision-makers to accept whatever option is pre-selected, requiring zero active physical or cognitive effort to maintain. Defaults act as implicit recommendations and leverage cognitive friction, dictating the overwhelming majority of real-world behaviors.',
+      definition: 'The deliberate design of the environment in which people make decisions. The Default Effect is the tendency for decision-makers to accept whatever option is pre-selected, requiring zero active physical or cognitive effort to maintain. Defaults act as implicit recommendations and leverage cognitive friction, and for enrolment-type decisions they determine the large majority of outcomes.',
     },
     underlyingMechanism: {
       evolutionaryDriver: 'Changing an environmental state requires calories and kinetic energy. In stable conditions, keeping things as they are preserves precious energy and avoids dangerous mistakes.',
@@ -87,8 +87,8 @@ export const SPHERE_4_CONCEPTS: Concept[] = [
       },
       professionalLifeTrigger: {
         title: 'Organ Donation Consent Rates in Austria vs Germany',
-        scenario: 'In Germany (where citizens must actively check a box to opt in), organ donation consent is ~12%. In Austria (where the checkbox is pre-checked and citizens must opt out), consent is ~99.98%!',
-        hiddenDynamic: 'No public marketing campaign could achieve this. The default checkbox alone determined life-or-death health outcomes.',
+        scenario: 'Recorded consent rates in opt-in countries such as Germany sit far below those in opt-out countries such as Austria — a gap of a few percent against near-universal. It is the most quoted default effect in existence, and the most overstated.',
+        hiddenDynamic: 'Read what is actually being measured: registered consent, not transplants performed. Actual donation rates across opt-in and opt-out countries differ far less, most opt-out systems still consult next of kin, and Spain\'s high performance is usually credited to its transplant-coordinator infrastructure rather than its legal default. The default moves the paperwork enormously; it moves the outcome much less.',
       },
     },
     conversationalWeaponry: [
@@ -130,7 +130,7 @@ export const SPHERE_4_CONCEPTS: Concept[] = [
       primaryTerm: 'Goodhart’s Law & Campbell’s Law',
       subConstructs: ['Proxy Gaming', 'Metric Fixation', 'Incentive Corruption Dynamic'],
       keyThinkers: ['Charles Goodhart', 'Donald T. Campbell', 'Marilyn Strathern'],
-      definition: 'Goodhart\'s Law states: "When a measure becomes a target, it ceases to be a good measure." Campbell\'s Law broadens this: "The more any quantitative social indicator is used for social decision-making, the more subject it will be to corruption pressures and the more it will distort the processes it was intended to monitor."',
+      definition: 'The popular one-liner — "When a measure becomes a target, it ceases to be a good measure" — is Marilyn Strathern\'s 1997 condensation, not Goodhart\'s wording. Goodhart\'s own 1975 formulation was narrower: "Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes." Campbell\'s Law, published the same year and arguably earlier, is the broader social version: "The more any quantitative social indicator is used for social decision-making, the more subject it will be to corruption pressures and the more it will distort the processes it was intended to monitor."',
     },
     underlyingMechanism: {
       evolutionaryDriver: 'Humans are opportunistic problem-solvers. If status, food, or money is tied to an abstract score, your brain takes the shortest physical and mental path to trigger the scoreboard reward, regardless of intent.',
@@ -355,19 +355,19 @@ export const SPHERE_4_CONCEPTS: Concept[] = [
     numberInSphere: 7,
     globalIndex: 37,
     title: 'Decision Fatigue & Cognitive Depletion Traps',
-    tagline: 'Willpower and executive function are like phone batteries: drain them with 50 small decisions, and you make reckless blunders by 6 PM.',
+    tagline: 'The tenth hard decision of the day gets worse treatment than the first. The effect is real; the popular "willpower battery" explanation for it is not.',
     plainEnglishAnalogy: 'The Candy Bars at the Grocery Checkout',
-    everydayHumanBehavior: 'Why are candy bars and sugary snacks placed right at the cash register in grocery stores? Because by the time you reach the register, you have made 150 small trade-off decisions comparing brands, sizes, and prices across 10 aisles. Your prefrontal cortex is completely exhausted. When you see a candy bar at the register, your brain has zero willpower left to resist, so you buy it without thinking.',
+    everydayHumanBehavior: 'Why are candy bars placed right at the cash register? Because by the time you reach it you have made a long series of small trade-offs across the whole store, and you are far more likely to stop weighing and simply take the easy option in front of you. Note what that explanation does not require: no drained battery, no exhausted organ. Attention is finite and serial, motivation to keep scrutinising drops, and the path of least resistance wins. Same behaviour, sturdier reason.',
     formalTerminology: {
       primaryTerm: 'Decision Fatigue & Executive Resource Depletion',
       subConstructs: ['Prefrontal Bandwidth Exhaustion', 'Choice Overload', 'Default Bias Drift'],
       keyThinkers: ['Roy Baumeister', 'Kathleen Vohs', 'Jonathan Levav'],
-      definition: 'The deteriorating quality of decisions made by an individual after a long session of decision making. When forced to make continuous, complex trade-offs, prefrontal cognitive capacity suffers fatigue, leading operators to either default to the easiest status-quo option (refusing to decide) or act impulsively without considering risks.',
+      definition: 'The deteriorating quality of decisions made across a long session of deciding: operators increasingly default to the status-quo option (refusing to decide) or act impulsively. The pattern is widely observed. Its classic explanation — a depletable executive resource, "ego depletion" — failed a large pre-registered multi-lab replication, so treat the phenomenon as real and the resource model as discredited.',
     },
     underlyingMechanism: {
       evolutionaryDriver: 'Ancestral hominids made few abstract multi-variable trade-offs per day. Modern executive work requires thousands of micro-decisions across emails, budgets, and personnel, exceeding evolved neurological bandwidth.',
-      neurologicalBasis: 'Prolonged cognitive control leads to an accumulation of metabolic waste products (such as glutamate) in the lateral prefrontal cortex, reducing neural transmission efficiency and demanding cognitive rest.',
-      summary: 'Never negotiate terms or make career-defining capital allocations at 6:30 PM on a Friday after 9 hours of back-to-back committee meetings.',
+      neurologicalBasis: 'No settled account exists. One line of work (Wiehler et al., 2022) reports glutamate accumulation in lateral prefrontal cortex after sustained control, but it is a single small study and not established. The glucose-as-willpower-fuel story is not credible on metabolic grounds. Mundane mechanisms — narrowing attention, falling motivation to keep scrutinising, and task-switching costs — explain the pattern without requiring a depleted organ.',
+      summary: 'Never negotiate terms or make career-defining capital allocations at 6:30 PM on a Friday after 9 hours of back-to-back committee meetings — the reason is mundane, and it holds regardless.',
     },
     realWorldRecognition: {
       personalLifeTrigger: {
@@ -377,15 +377,15 @@ export const SPHERE_4_CONCEPTS: Concept[] = [
       },
       professionalLifeTrigger: {
         title: 'Parole Judges Granting Freedom at 9 AM vs 4 PM',
-        scenario: 'A landmark study of Israeli parole judges found favorable rulings were ~65% first thing in the morning and right after lunch breaks, dropping to nearly 0% right before breaks.',
-        hiddenDynamic: 'Granting parole is risky and requires careful mental deliberation. Denying parole is safe and preserves the status quo. Exhausted judges default to the safest status quo.',
+        scenario: 'A much-cited study of Israeli parole judges reported favorable rulings around 65% after breaks, falling to near zero just before them. Treat it with care: later analysis showed cases were not randomly ordered — unrepresented prisoners were scheduled differently and sessions ended when a case list finished — so the drop may be scheduling, not fatigue.',
+        hiddenDynamic: 'Granting parole is the effortful, risky call; denying it preserves the status quo. Whatever the cause in that dataset, the general lesson holds — when scrutiny gets expensive, people drift toward the option that requires none.',
       },
     },
     conversationalWeaponry: [
       {
         situation: 'Protecting Critical Decisions from Late-Day Fatigue',
-        phrase: 'We have been in this room for six hours debating edge cases. If we decide our capital allocation right now, we are deciding with depleted prefrontal bandwidth. Let\'s sleep on this and cast votes tomorrow at 9 AM.',
-        rationale: 'Labels the physiological constraint and prevents catastrophic late-day fatigue blunders.',
+        phrase: 'We have been in this room for six hours debating edge cases. Nobody here is going to give this the scrutiny it needs right now, and the safe-looking option is going to win by default. Let\'s sleep on it and cast votes tomorrow at 9 AM.',
+        rationale: 'Names the real risk — degraded scrutiny and status-quo drift — without leaning on a discredited willpower-as-fuel story that a well-read counterpart could puncture.',
         contextTag: 'Executive',
       },
       {
@@ -400,7 +400,7 @@ export const SPHERE_4_CONCEPTS: Concept[] = [
       creatorOrHost: 'Shai Danziger, Jonathan Levav, & Liora Avnaim-Pesso',
       platform: 'Paper',
       duration: '26 min read',
-      whyItBeatsTheNoise: 'The seminal 2011 study demonstrating the staggering correlation between meal breaks and favorable parole determinations among seasoned judges.',
+      whyItBeatsTheNoise: 'The 2011 study behind every popular retelling of decision fatigue. Read it alongside Weinshall-Margel and Shapard\'s critique showing the case ordering was not random — the pair is a better lesson in reading evidence than either paper alone.',
       searchQuery: 'Danziger Levav Extraneous factors in judicial decisions PNAS 2011',
       url: 'https://doi.org/10.1073/pnas.1018033108',
     },

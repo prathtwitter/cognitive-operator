@@ -23,7 +23,7 @@ export const deepDive: DeepDive = {
       ],
       example: {
         label: 'Testing the theory in the lab',
-        body: 'Karen Cook and Richard Emerson later built small laboratory exchange networks — structures where some positions could trade with two or three partners and others were boxed into just one — to see whether power actually followed the structural math. It generally did: participants in positions with more available trading partners extracted better terms than participants stuck with a single connection, independent of anything about their individual bargaining skill. The result mattered because it moved power-dependence from an armchair theory into something tested under controlled conditions, even though a stylized lab network simplifies how real organizations and relationships actually work.',
+        body: 'Karen Cook and Richard Emerson later built small laboratory exchange networks — structures where some positions could trade with two or three partners and others were boxed into just one — to see whether power actually followed the structural math. It generally did: participants whose position let them credibly exclude a partner extracted better terms than participants who could be excluded and had nowhere else to go, independent of anything about their individual bargaining skill — though follow-up work found that raw number of connections is a poor proxy for this, and it is exclusion, not connectedness, that does the work. The result mattered because it moved power-dependence from an armchair theory into something tested under controlled conditions, even though a stylized lab network simplifies how real organizations and relationships actually work.',
       },
     },
     {

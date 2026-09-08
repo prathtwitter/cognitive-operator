@@ -38,7 +38,7 @@ export const deepDive: DeepDive = {
       body: [
         'Financially literate people aren’t protected. DellaVigna and Malmendier’s gym-contract research is the sharpest demonstration: people who chose a flat membership over pay-per-visit, predicting they’d attend enough to justify it, went on to attend at a rate that made pay-per-visit objectively cheaper — and many kept paying for months after their last visit rather than cancelling. This isn’t a sample that can’t do arithmetic; gym members skew toward the demographic that should be best at it.',
         'Awareness doesn’t fully fix this because most people are neither fully naive about their own future present bias nor fully sophisticated about defending against it — they’re partially naive. They know, abstractly, that they sometimes give in to temptation, but underestimate how often, which is exactly enough self-knowledge to justify signing up for the flat-fee plan “because this time will be different,” and not enough to build a real defense against the self that shows up on a rainy Tuesday.',
-        'A counterintuitive result in the O’Donoghue and Rabin framework: partial self-awareness can produce more procrastination than full naivete or full sophistication, because it convinces you a future deadline will get handled — “I know how I am, I’ll plan for it” — without producing the commitment device that makes the plan real. Half-knowledge can be worse than none, when used to justify inaction instead of building a binding structure.',
+        'A counterintuitive result in O’Donoghue and Rabin’s later work: partial self-awareness can produce more procrastination than full naivete or full sophistication, because it convinces you a future deadline will get handled — “I know how I am, I’ll plan for it” — without producing the commitment device that makes the plan real. Half-knowledge can be worse than none, when used to justify inaction instead of building a binding structure.',
         'The pattern is familiar from elsewhere in behavioral science: intelligence and financial literacy help you understand the mechanism intellectually, and do almost nothing to stop it operating on you the next time the tempting option sits in front of you rather than a month away. Only a structural commitment made while cold reliably works — not a resolution made while warm.',
       ],
     },
@@ -160,8 +160,8 @@ export const deepDive: DeepDive = {
       finding: 'Catalogued discounting anomalies beyond the basic reversal — a magnitude effect where larger sums are discounted less steeply, and different treatment of gains versus losses — indicating present bias is a family of related effects, not one mechanism.',
     },
     {
-      source: 'O’Donoghue & Rabin, “Doing It Now or Later” (1999)',
-      finding: 'Modeled naive agents who don’t anticipate their own future present bias, sophisticated agents who do and pre-commit, and partially naive agents in between — showing partial self-awareness can produce more procrastination than either extreme.',
+      source: 'O’Donoghue & Rabin, “Doing It Now or Later” (1999) and “Choice and Procrastination” (2001)',
+      finding: 'The 1999 paper modeled naive agents who don’t anticipate their own future present bias against sophisticated agents who do and pre-commit. The 2001 paper added the partially naive agent, who knows she has a self-control problem but underestimates it, and showed that this in-between state can produce more severe procrastination than either extreme.',
     },
     {
       source: 'DellaVigna & Malmendier, “Paying Not to Go to the Gym” (2006)',

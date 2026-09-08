@@ -23,7 +23,7 @@ export const deepDive: DeepDive = {
       ],
       example: {
         label: 'Hawk-Dove, in the language of biologists',
-        body: 'John Maynard Smith and George Price’s 1973 model scored contests between a hawk strategy, which escalates and fights until injured or victorious, and a dove strategy, which displays and retreats rather than risk injury. Where fights are costly, dove-like restraint can be the better long-run strategy precisely because a hawk has, in effect, pre-committed to not backing down — fighting one to a draw costs more than yielding outright. The finding was about animal contests, not boardrooms, but it supplies real evolutionary grounding for the claim that unyielding commitment can beat flexibility: payoff structure, not personality, decides who folds.',
+        body: 'John Maynard Smith and George Price’s 1973 model scored contests between a hawk strategy, which escalates and fights until injured or victorious, and a dove strategy, which displays and retreats rather than risk injury. Where injury costs more than the resource is worth, yielding to a hawk beats fighting it — a hawk has, in effect, pre-committed to not backing down, so forcing the issue costs more than conceding. Neither pure strategy takes over: the stable outcome is a mix, set by the ratio of injury cost to resource value. The finding was about animal contests, not boardrooms, but it supplies real evolutionary grounding for the claim that unyielding commitment changes what a rational rival should do: payoff structure, not personality, decides who folds.',
       },
     },
     {

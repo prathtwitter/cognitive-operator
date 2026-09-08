@@ -3,7 +3,7 @@ import type { DeepDive } from '../../../types/curriculum';
 /** #18 · Sphere 2 · Counter-Signaling Theory */
 export const deepDive: DeepDive = {
   readingTimeMinutes: 14,
-  hook: 'In May 2012, during the week Facebook went public, an equity analyst went on television to complain about a hooded sweatshirt. Mark Zuckerberg had worn one to the investor roadshow, and the analyst read it as a mark of immaturity — a sign the young chief executive was not taking seriously the people he was asking for sixteen billion dollars. Read that again. A man about to complete one of the largest public offerings in history had declined to wear the uniform, and a professional observer concluded he could not be taken seriously. The reading was backwards. The reason it was backwards is a piece of formal economics that almost nobody who quotes “the billionaire in the plain t-shirt” has actually read.',
+  hook: 'In May 2012, in the days before Facebook went public, an equity analyst went on television to complain about a hooded sweatshirt. Mark Zuckerberg had worn one to the investor roadshow, and the analyst read it as a mark of immaturity — a sign the young chief executive was not taking seriously the people he was asking for sixteen billion dollars. Read that again. A man about to complete one of the largest public offerings in history had declined to wear the uniform, and a professional observer concluded he could not be taken seriously. The reading was backwards. The reason it was backwards is a piece of formal economics that almost nobody who quotes “the billionaire in the plain t-shirt” has actually read.',
   sections: [
     {
       heading: 'The condition everybody drops',

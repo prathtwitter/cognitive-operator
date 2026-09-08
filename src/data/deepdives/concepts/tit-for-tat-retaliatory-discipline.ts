@@ -3,7 +3,7 @@ import type { DeepDive } from '../../../types/curriculum';
 /** #25 · Sphere 3 · Tit-for-Tat & Retaliatory Discipline in Iterated Games */
 export const deepDive: DeepDive = {
   readingTimeMinutes: 14,
-  hook: 'Robert Axelrod invited game theorists from around the world to submit a computer program to a round-robin tournament with one rule: each round, cooperate or betray, and score points based on both players’ moves. Entrants included professors of mathematics, economics and psychology, submitting programs hundreds of lines long that modeled their opponent, bluffed, and planned several moves ahead. The winning submission, in both tournaments Axelrod ran, was four lines of logic: cooperate first, then do back to your opponent exactly what they just did to you. Every attempt at cleverness in the field lost to a rule simple enough to explain over lunch. That result is one of the most misquoted findings in game theory, and the misquoting starts with what people assume it proves.',
+  hook: 'Robert Axelrod invited game theorists — and, for the rematch, anyone who could code — to submit a computer program to a round-robin tournament with one rule: each round, cooperate or betray, and score points based on both players’ moves. Entrants included professors of mathematics, economics and psychology, submitting programs up to twenty times longer that modeled their opponent, bluffed, and planned several moves ahead. The winning submission, in both tournaments Axelrod ran, was four lines of logic: cooperate first, then do back to your opponent exactly what they just did to you. Every attempt at cleverness in the field lost to a rule simple enough to explain over lunch. That result is one of the most misquoted findings in game theory, and the misquoting starts with what people assume it proves.',
   sections: [
     {
       heading: 'What the rule actually says',
@@ -163,7 +163,7 @@ export const deepDive: DeepDive = {
       caveat: 'Which strategy wins is sensitive to the noise rate, payoff values, and the mix of competing strategies in the population. Treat this as evidence that plain tit-for-tat is beatable under realistic conditions, not as proof that any one replacement is universally optimal.',
     },
     {
-      source: 'Sugden, and Boerlijst, Nowak & Sigmund, on Contrite Tit-for-Tat (1990s)',
+      source: 'Sugden (1986), and Boerlijst, Nowak & Sigmund (1997), on Contrite Tit-for-Tat',
       finding: 'Describes a variant that tracks whether its own last defection was a justified retaliation or an unprovoked error, and stands down instead of retaliating against its own mistake, built specifically to stop the self-perpetuating echo effect strict tit-for-tat suffers under noise.',
     },
     {

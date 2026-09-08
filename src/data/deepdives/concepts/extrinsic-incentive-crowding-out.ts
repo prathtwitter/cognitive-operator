@@ -10,7 +10,7 @@ export const deepDive: DeepDive = {
       body: [
         'The popular version is “money kills motivation,” which is easy to disprove — pay a warehouse picker more per unit and they pick more units, indefinitely. The real claim is narrower. For a specific class of acts, an explicit price does not add to an existing moral motive. It replaces it. The two are not forces summing to a total; they are mutually exclusive descriptions of the same act, and naming a price tells everyone which one now applies.',
         'The precision most people lose is the dependent measure. Edward Deci’s original puzzle studies did not find that paid subjects solved fewer puzzles while being paid. They solved them fine. What changed was measured afterwards, in a free-choice period when nobody was paying or watching — the paid group spent less of that unwatched time on the puzzles. The damage appears in discretionary behaviour after the incentive ends, which is precisely what no organisation instruments.',
-        'That points at the part worth acting on. The headline result is not that a fine failed to deter. It is that withdrawing the fine did not restore what existed before it. That asymmetry — a one-way door between a social frame and a market frame — is the robust core, and it survives every methodological argument attached to the rest of the field.',
+        'That points at the part worth acting on. The headline result is not that a fine failed to deter. It is that withdrawing the fine did not restore what existed before it. That asymmetry — a one-way door between a social frame and a market frame — is the most useful part of the finding, and the part least dependent on the disputes attached to the rest of the field. It is not beyond challenge: a later vignette replication of the day-care design (Metcalf et al., 2020) found respondents returning to baseline once the fine was lifted. That was an online scenario study rather than a field experiment, so it does not overturn the original result, but it does mean the one-way door should be held as a strong working assumption rather than a law.',
       ],
     },
     {
@@ -29,7 +29,7 @@ export const deepDive: DeepDive = {
       heading: 'The move: converting a norm into a line item',
       body: [
         'The nameable move is norm-to-price conversion. It is a category switch, not a dial adjustment, and it is almost always performed by someone trying to be reasonable — formalising an expectation, making an obligation explicit, replacing vague social pressure with a clear rule. Each is good management under normal conditions. Each also publishes a price.',
-        'The vivid case is Uri Gneezy and Aldo Rustichini’s study of day-care centres in Haifa, Israel. Some centres introduced a small fine for parents who collected their children late. Deterrence logic predicts fewer late pickups. The opposite happened: late arrivals rose substantially, roughly doubling, and stayed high. Before the fine, lateness meant imposing on a staff member who had to stay behind for you, and that cost was guilt with no ceiling. Afterwards it cost a small published amount — a bargain against unbounded guilt.',
+        'The vivid case is Uri Gneezy and Aldo Rustichini’s study of day-care centres in Haifa, Israel. Some centres introduced a small fine for parents who collected their children late. Deterrence logic predicts fewer late pickups. The opposite happened: late arrivals rose substantially and stayed high. Before the fine, lateness meant imposing on a staff member who had to stay behind for you, and that cost was guilt with no ceiling. Afterwards it cost a small published amount — a bargain against unbounded guilt.',
         'The commercially important part came at the end. When the fine was withdrawn, late pickups did not fall back. They stayed elevated, because information cannot be un-published. Parents now knew lateness had a price, roughly what it was, and that the centre was willing to charge it. Setting that price to zero does not restore guilt. It makes the transaction free.',
       ],
       example: {
@@ -132,7 +132,7 @@ export const deepDive: DeepDive = {
     },
     {
       misread: 'If crowding-out happened, you can undo it by removing the incentive.',
-      correction: 'This is what most directly contradicts intuition. Withdrawing the payment sets the price to zero rather than restoring the obligation, and the one study that tested the withdrawal phase found the elevated behaviour persisted. Plan incentives as one-way doors.',
+      correction: 'This is what most directly contradicts intuition. Withdrawing the payment sets the price to zero rather than restoring the obligation, and the field study that tested the withdrawal phase found the elevated behaviour persisted. A later vignette replication did find a return to baseline, so treat one-way doors as the working assumption rather than a certainty — and plan incentives accordingly.',
     },
     {
       misread: 'The undermining effect is settled science.',
@@ -146,8 +146,8 @@ export const deepDive: DeepDive = {
   evidence: [
     {
       source: 'Gneezy & Rustichini, “A Fine Is a Price” (Journal of Legal Studies, 2000)',
-      finding: 'Day-care centres in Haifa that introduced a small fine for late pickup saw late arrivals rise substantially rather than fall, roughly doubling and staying high. When the fine was later withdrawn, lateness did not return to its pre-fine level.',
-      caveat: 'A single field study across a small number of centres in one city, without large-scale replication. The direction and the non-reversal are durable; the magnitude is not a general effect size.',
+      finding: 'Day-care centres in Haifa that introduced a small fine for late pickup saw late arrivals rise substantially rather than fall, and stay high. When the fine was later withdrawn, lateness did not return to its pre-fine level.',
+      caveat: 'A single field study across a small number of centres in one city, without large-scale replication. The magnitude is not a general effect size. The non-reversal has also been challenged: Metcalf et al. (2020) replicated the design as an online vignette and found respondents returning to baseline once the fine was lifted. A scenario study does not overturn a field result, but the asymmetry is a strong working assumption rather than a settled law.',
     },
     {
       source: 'Gneezy & Rustichini, “Pay Enough or Don’t Pay at All” (Quarterly Journal of Economics, 2000)',

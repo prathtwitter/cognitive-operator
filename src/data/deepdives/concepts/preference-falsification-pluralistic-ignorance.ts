@@ -28,7 +28,7 @@ export const deepDive: DeepDive = {
         'Falsification alone would be survivable. What converts it into a self-sustaining trap is one specific inferential error, committed by everyone in the room simultaneously.',
         'You know your own nod was strategic. You experienced the calculation — the flicker of hesitation, the decision not to spend capital on this one. You have full access to the gap between your face and your mind. You have no such access to anyone else’s, so you take their nod at face value. Their silence gets attributed to genuine agreement; yours gets attributed to circumstance. Everyone applies this asymmetry at the same moment, and you get eleven people each concluding they are the only sceptic.',
         'That conclusion then raises the price of speaking. Being one of many objectors is cheap; being the sole objector against a unanimous room is expensive, and now you believe that is what you would be. So you falsify harder, which strengthens the misperception for everyone else, which raises their cost, and the loop closes. Neither one caused the other first.',
-        'There is a nastier turn documented by Willer, Kuwabara and Macy: people who privately reject a norm sometimes enforce it on others more aggressively than true believers do, because visible enforcement is the cheapest available proof of sincerity. The loudest advocate in the room can be the person with the deepest private doubts, defending against exactly the suspicion you would have of them. Enthusiasm is not evidence either.',
+        'There is a nastier turn documented by Willer, Kuwabara and Macy: people who privately reject a norm will publicly enforce it on others, because visible enforcement is the cheapest available proof of sincerity. The loudest advocate in the room can be the person with the deepest private doubts, defending against exactly the suspicion you would have of them. Enthusiasm is not evidence either.',
       ],
       example: {
         label: 'The board that voted yes twice',
@@ -39,7 +39,7 @@ export const deepDive: DeepDive = {
       heading: 'Seniority makes your information worse',
       body: [
         'The instinct is that experience inoculates you. It does the opposite, and the mechanism is structural rather than psychological. Preference falsification is a function of the cost of dissent, and that cost scales with the power of whoever is listening. The more senior you become, the more expensive it is for anyone to contradict you, so the more filtered your input — and the filtering is invisible, because what arrives is fluent, confident agreement that looks exactly like validation. Every promotion degrades your data quality while improving your apparent track record of being right in meetings. Those are the same phenomenon from different seats.',
-        'It gets worse when you know the theory. Understanding groupthink does not immunise you, because what stops people speaking is not ignorance of the concept. Asch’s participants were not confused about which line was longer, and Asch was careful about this: most conforming responses came from people who saw the correct answer perfectly well and went along anyway. The failure was never perceptual. It was a decision about what to say, and knowing the name of the phenomenon changes nothing about the price of saying it.',
+        'It gets worse when you know the theory. Understanding groupthink does not immunise you, because what stops people speaking is not ignorance of the concept. Asch was careful about what his yielders were actually doing, and the detail is worth getting right. Genuine perceptual distortion — literally seeing the majority’s line as correct — was rare. Most yielders either concluded their own judgement must be the faulty one, or knew the majority was wrong and went along regardless. Either way the eyes were working. What moved was what people were willing to trust, or willing to say — and knowing the name of the phenomenon changes nothing about the price of saying it.',
         'Your own falsification is also invisible to you in a way other people’s is not. Ask when you last held a real objection and let it go — not because you were persuaded, but because it was not the day for it, or the room had moved, or you had already spent your capital that week. Most people find an example in ten seconds. Now note that everyone else recorded your silence as agreement, and that you have no idea how many of theirs you recorded the same way.',
       ],
       example: {
@@ -135,7 +135,7 @@ export const deepDive: DeepDive = {
     },
     {
       misread: 'Asch showed that people cannot trust their own eyes under group pressure.',
-      correction: 'Asch was explicit that most conforming responses came from people who saw the correct answer and said something else anyway. It is a finding about the price of speaking, not about perception — which is why intelligence and expertise do not protect against it.',
+      correction: 'Asch’s own analysis of yielders found genuine perceptual distortion was rare. Most either concluded their own judgement must be wrong, or knew the majority was wrong and complied anyway. Either way the eyes were working: what moved was what people were willing to trust or willing to say — which is why intelligence and expertise do not protect against it.',
     },
     {
       misread: 'The Abilene Paradox is evidence for this.',
@@ -153,7 +153,7 @@ export const deepDive: DeepDive = {
     },
     {
       source: 'Asch line-judgement studies (1951–1956)',
-      finding: 'With a unanimous majority giving an obviously wrong answer, participants conformed on roughly a third of critical trials and about three-quarters conformed at least once. Control-condition error rates were under one percent. Asch reported that most conformers knew the right answer and went along regardless.',
+      finding: 'With a unanimous majority giving an obviously wrong answer, participants conformed on roughly a third of critical trials and about three-quarters conformed at least once. Control-condition error rates were under one percent. Asch sorted yielders into three groups: outright perceptual distortion was rare, while distortion of judgement (deciding one’s own view must be wrong) was the largest category and distortion of action (knowing better and complying) a smaller one.',
     },
     {
       source: 'Asch, the partner and unanimity variations',
@@ -170,7 +170,7 @@ export const deepDive: DeepDive = {
     },
     {
       source: 'Willer, Kuwabara & Macy, "The False Enforcement of Unpopular Norms" (2009)',
-      finding: 'People who privately reject a norm can enforce it on others more aggressively than genuine believers, because visible enforcement is the cheapest way to prove sincerity. Loud public advocacy is therefore not evidence of private conviction.',
+      finding: 'People who privately reject a norm will publicly enforce it on others, because visible enforcement is the cheapest way to prove sincerity. Loud public advocacy is therefore not evidence of private conviction.',
     },
     {
       source: 'Prentice & Miller, campus alcohol norms (1993)',

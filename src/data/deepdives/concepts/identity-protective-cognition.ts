@@ -29,8 +29,8 @@ export const deepDive: DeepDive = {
       heading: 'The move: analytical effort spent on one side only',
       body: [
         'Charles Taber and Milton Lodge named the behaviour in 2006, and their term beats confirmation bias because it points at the asymmetry rather than the outcome. They called it disconfirmation bias. Congenial evidence is accepted near face value and processed fast. Uncongenial evidence triggers an extended, effortful, genuinely skilled search for reasons it does not count. The difference is not in ability. It is in how much ability gets deployed, and in which direction. This is why the phenomenon is invisible from the inside: nothing about counter-arguing feels like bias, it feels like rigour, because it is rigour. You really are finding real methodological problems. The critique is not the problem. The problem is that you only went looking on one side.',
-        'The study in the hook is the cleanest demonstration available, because it isolates the effect on skill rather than on belief. In the skin-cream version numeracy behaves as it should: the more numerate you are, the more likely you get the ratio right. In the gun-control version, with identical numbers, that relationship comes apart. Highly numerate people get it right when the correct answer flatters their politics and wrong when it does not — and the gap between the two sides is widest among the most numerate participants of all.',
-        'Read that last clause again. Numeracy did not merely fail to help. It actively drove the two sides further apart.',
+        'The study in the hook is the cleanest demonstration available, because it isolates the effect on skill rather than on belief. In the skin-cream version numeracy behaves as it should: the more numerate you are, the more likely you get the ratio right. In the gun-control version, with identical numbers, that relationship comes apart. Highly numerate people get it right when the correct answer flatters their politics and wrong when it does not — and the gap between the two sides is widest among the most numerate participants of all. That specific interaction is contested: two large replications, one preregistered and one nationally representative, failed to reproduce numeracy amplifying the divergence, and the dispute is live. What is not contested is the asymmetry underneath it — effort spent generously on the congenial answer and forensically on the uncongenial one.',
+        'Read that last clause again. In this study numeracy did not merely fail to help — it tracked with the two sides moving further apart. Whether skill genuinely drives that divergence is the part still being fought over. That capability offers no protection is the part that has held up.',
       ],
       example: {
         label: 'The incrementality test nobody accepts',
@@ -38,10 +38,10 @@ export const deepDive: DeepDive = {
       },
     },
     {
-      heading: 'Skill is the accelerant, not the antidote',
+      heading: 'Skill is not the antidote',
       body: [
         'Most debiasing advice assumes capability and accuracy point the same way — that if you get more numerate, more scientifically literate, more analytically reflective, you converge on the truth. On identity-loaded questions that assumption is not merely weak. It has the sign wrong.',
-        'In 2012 Kahan and colleagues surveyed roughly 1,500 US adults on climate risk, measuring science literacy and numeracy. The expectation is that the more scientifically literate are more concerned. Neither measure showed any association with greater concern. What they predicted was polarisation: the most scientifically literate respondents were furthest apart, spread along the lines of their cultural worldview. Kahan found a matching pattern with the Cognitive Reflection Test — higher scores produced more ideologically selective assessment of evidence, not less.',
+        'In 2012 Kahan and colleagues surveyed roughly 1,500 US adults on climate risk, measuring science literacy and numeracy. The expectation is that the more scientifically literate are more concerned. Neither measure showed any association with greater concern. What tracked with them was polarisation: the most scientifically literate respondents were furthest apart, spread along the lines of their cultural worldview. Kahan reported a matching pattern with the Cognitive Reflection Test. Note the shape of this evidence — it is a cross-sectional correlation, so it shows capability and division travelling together rather than proving the first causes the second. That is weaker than the popular retelling, and still enough to sink the assumption that more capable people converge.',
         'The explanation is not mysterious once you accept that reasoning is a general-purpose instrument. Analytical skill carries no built-in target. Point it at what is true here and it finds truth. Point it at how do I remain a credible member of this group and it finds superb arguments for whatever the group already holds. Nothing internal to the skill decides which it is doing.',
         'The consequence for a leadership team is unpleasant. On any question that has become an identity marker, the most analytically capable person in the room who has already committed publicly is the least likely to update and the most likely to convince everyone else not to.',
       ],
@@ -149,9 +149,9 @@ export const deepDive: DeepDive = {
       finding: 'Motivation does not manufacture conclusions directly. It biases which memories, rules and inference procedures get accessed, under a constraint Kunda called the illusion of objectivity: you must be able to build a justification a dispassionate observer would accept. That constraint is why the process is undetectable from the inside.',
     },
     {
-      source: 'Kahan, Peters, Dawson & Slovic, “Motivated Numeracy and Enlightened Self-Government” (2013)',
+      source: 'Kahan, Peters, Dawson & Slovic, “Motivated Numeracy and Enlightened Self-Government” (working paper 2013; published Behavioural Public Policy, 2017)',
       finding: 'About 1,100 US adults solved a covariance problem framed either as a skin-cream trial or, with identical numbers, as a gun-control result. In the neutral framing higher numeracy predicted accuracy. In the political framing it predicted polarisation: the most numerate were most accurate when the right answer suited their politics and least accurate when it did not.',
-      caveat: 'A single design, a US partisan sample and a highly charged issue. The robust claim is the direction — skill amplifying divergence — rather than any effect size, and it should be carried across to workplace disputes with care.',
+      caveat: 'Contested, and seriously so. The specific interaction — numeracy amplifying partisan divergence — has repeatedly failed to replicate. A preregistered replication (Persson et al., Cognition, 2021) found ideologically congruent responding that was not moderated by numeracy, and a large nationally representative sample (Stagnaro, Tappin & Rand, PNAS, 2023) found higher numeracy improved accuracy regardless of whether the answer suited the participant\'s politics. Some studies support the original result and Kahan disputes the negative findings. Treat the asymmetric standard of evidence as the established phenomenon, and "skill amplifies divergence" as an open question.',
     },
     {
       source: 'Kahan et al., Nature Climate Change (2012)',
@@ -184,7 +184,7 @@ export const deepDive: DeepDive = {
   takeaways: [
     'Motivated reasoning does not fabricate conclusions. It quietly relocates the standard of evidence. Watch the bar, not the belief.',
     'The stake is membership, not preference. People defend their standing in a group far harder than they defend any particular claim.',
-    'Analytical skill is an accelerant. On identity-loaded questions the most capable person in the room diverges fastest and argues best.',
+    'Analytical skill does not reliably protect you. Whether it actively accelerates divergence is disputed — but it does reliably supply better arguments for whatever position is already held.',
     'The only checkable test is asymmetry: would this same evidence, with the same flaws, have been accepted if it pointed the other way?',
     'Change the identity you are recruiting before you present the data. Offer a self that is served by getting it right.',
     'Say the tribe out loud and you lose. Once belonging is the explicit subject, every subsequent fact arrives as an attack.',

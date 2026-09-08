@@ -9,8 +9,8 @@ export const deepDive: DeepDive = {
       heading: 'Two laws, one mechanism, and a misquote in between',
       body: [
         'Start with what this is not. Nothing here is a laboratory finding with a sample size and a p-value. Goodhart’s and Campbell’s laws are observations distilled from decades of watching real institutions respond to the targets placed on them. The evidence is case-based and historical, not experimental, and treating it as a double-blind result overstates what anyone measured. What it offers instead is arguably more useful: a pattern that has reproduced itself, in wildly different domains, for half a century.',
-        'The narrower, older claim belongs to Charles Goodhart, a Bank of England economist, writing about UK monetary policy around 1975. His point was technical: a statistical regularity between a monetary aggregate and the economy tends to break down once policymakers start deliberately targeting that aggregate, because the behavior generating the regularity adapts to the new rule. Donald Campbell, a social psychologist, published a broader version the following year aimed at social indicators: the more weight a quantitative measure carries in funding or reward decisions, the more it will be corrupted, and the more it will distort the process it was built to track.',
-        'The sentence most people quote — “when a measure becomes a target, it ceases to be a good measure” — belongs to neither man. It is anthropologist Marilyn Strathern’s 1997 paraphrase, written about audit culture inside British universities, and it is routinely misattributed straight to Goodhart because it is cleaner than anything he or Campbell actually wrote. Attribution aside, it is the right one-line summary of what follows.',
+        'The two men arrived at the idea independently in the mid-1970s, and Campbell probably got there first: his paper was presented in 1974 and published in 1975, and Jeffery Rodamar has traced earlier formulations back to Campbell’s 1969 “Reforms as Experiments.” Charles Goodhart, a Bank of England economist, published his version in a 1975 paper on UK monetary policy, and his was the narrower one: a statistical regularity between a monetary aggregate and the economy tends to break down once policymakers start deliberately targeting that aggregate, because the behavior generating the regularity adapts to the new rule. Campbell, a social psychologist, aimed his at social indicators: the more weight a quantitative measure carries in funding or reward decisions, the more it will be corrupted, and the more it will distort the process it was built to track.',
+        'The sentence most people quote — “when a measure becomes a target, it ceases to be a good measure” — belongs to neither man. It is anthropologist Marilyn Strathern’s 1997 condensation, written about audit culture inside British universities and itself a response to Keith Hoskin’s 1996 version of the same line, and it is routinely misattributed straight to Goodhart because it is cleaner than anything he or Campbell actually wrote. Attribution aside, it is the right one-line summary of what follows.',
       ],
     },
     {
@@ -127,7 +127,7 @@ export const deepDive: DeepDive = {
     },
     {
       misread: 'Goodhart’s law and Campbell’s law are the same claim with two names attached.',
-      correction: 'They are related but distinct. Goodhart’s point was narrow, about a monetary indicator collapsing under targeting. Campbell’s, a year later, was broader and specifically about social indicators corrupting the process they monitor. The popular one-liner most people quote belongs to neither — it is Marilyn Strathern’s 1997 paraphrase.',
+      correction: 'They are related but distinct, and near-simultaneous — both published in 1975, with Campbell arguably first. Goodhart’s point was narrow, about a monetary indicator collapsing under targeting. Campbell’s was broader and specifically about social indicators corrupting the process they monitor. The popular one-liner most people quote belongs to neither — it is Marilyn Strathern’s 1997 condensation.',
     },
     {
       misread: 'A more data-savvy, analytically sophisticated team is protected from this.',
@@ -150,8 +150,8 @@ export const deepDive: DeepDive = {
     },
     {
       source: 'Strathern, “Improving Ratings: Audit in the British University System” (1997)',
-      finding: 'Coined the now-famous paraphrase — “when a measure becomes a target it ceases to be a good measure” — applying the idea to audit and research-assessment metrics in UK academia.',
-      caveat: 'This line is routinely misattributed directly to Goodhart; it is Strathern’s condensation, not his original wording.',
+      finding: 'Popularized the now-famous condensation — “when a measure becomes a target it ceases to be a good measure” — applying the idea to audit and research-assessment metrics in UK academia.',
+      caveat: 'This line is routinely misattributed directly to Goodhart; it is Strathern’s condensation, not his original wording, and it was itself a response to a nearly identical line in Keith Hoskin’s 1996 chapter on accountability.',
     },
     {
       source: 'Georgia state investigation and racketeering trial, Atlanta Public Schools testing scandal',
@@ -177,7 +177,7 @@ export const deepDive: DeepDive = {
   takeaways: [
     'Goodhart’s and Campbell’s laws rest on decades of institutional case evidence, not lab experiments — a reliable pattern, not a statistical finding with a confidence interval.',
     'The mechanism is structural: a metric is a lossy compression of a goal, and optimization pressure applied to it will find and exploit the gap between the two.',
-    'The popular one-line version was never written by Goodhart — it is Marilyn Strathern’s 1997 paraphrase. Goodhart’s claim was about monetary targets; Campbell’s, a year later, was broader and about social indicators.',
+    'The popular one-line version was never written by Goodhart — it is Marilyn Strathern’s 1997 condensation. Goodhart’s 1975 claim was about monetary targets; Campbell’s, published the same year and arguably earlier, was broader and about social indicators.',
     'Sophistication does not protect you from this — it only makes gaming faster to find, which is why the most metrics-driven, best-run organizations are often hit hardest.',
     'The danger switches on the moment a diagnostic number becomes an incentive-linked target. Keep dashboards and bonuses separate wherever you genuinely can.',
     'The fix is not fewer numbers — it is fewer degrees of freedom: pair metrics, audit the raw cases behind a good score, and ask what a lazy optimizer would do before you reward it.',

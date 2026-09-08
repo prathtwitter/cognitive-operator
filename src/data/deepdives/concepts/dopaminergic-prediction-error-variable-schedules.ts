@@ -30,14 +30,14 @@ export const deepDive: DeepDive = {
       ],
       example: {
         label: 'A near-miss that isn’t near anything',
-        body: 'Neuroimaging research on gambling has found that near-miss outcomes activate reward-related brain circuitry in a way that resembles an actual win, and this response is especially pronounced in people who already struggle to control their gambling. The finding is uncomfortable precisely because it is not a story about poor judgment: a near-miss carries zero statistical information about the next spin, exactly as much as a total blank does, yet the anticipatory system built to track uncertainty responds to it as though something meaningful almost happened.',
+        body: 'Neuroimaging research on gambling has found that near-miss outcomes activate reward-related brain circuitry in a way that resembles an actual win, and a follow-up study found this response scaled with how severe a person’s gambling problems were. The finding is uncomfortable precisely because it is not a story about poor judgment: a near-miss carries zero statistical information about the next spin, exactly as much as a total blank does, yet the anticipatory system built to track uncertainty responds to it as though something meaningful almost happened.',
       },
     },
     {
       heading: 'Knowing the odds does not turn off the wanting',
       body: [
         'Explicit knowledge and the dopaminergic wanting system run on largely separate tracks. Behavior analysts distinguish rule-governed behavior — acting on a verbal description of how something works — from contingency-shaped behavior, which is built directly by repeated exposure to a schedule regardless of what a person can say about it. Telling yourself, accurately, that a slot machine is random does not touch the second track at all.',
-        'This is why the sharpest evidence against “just know the mechanism and you’re safe” comes from people who know the mechanism best. Near-miss and uncertainty effects show up strongly in experienced gamblers who can state the odds precisely, and problem gamblers are not, as a group, worse at understanding randomness than anyone else — their explicit knowledge and their compulsive behavior simply do not talk to each other.',
+        'This is why the sharpest evidence against “just know the mechanism and you’re safe” comes from people who know the mechanism best. Near-miss and uncertainty effects show up strongly in experienced gamblers who can state the odds precisely, which is the point: accurate explicit knowledge and compulsive behavior coexist because they run on separate tracks. Do not push that further than it goes, though. Problem gamblers do score higher than non-gamblers on questionnaire measures of gambling-related distortions, gambler’s-fallacy items most of all. The claim is that knowing the odds does not disable the pull, not that the two groups reason identically.',
         'The same gap shows up in far less dramatic form in product designers and executives who understand variable-reward mechanics professionally and still check their own dashboards, inboxes and phones compulsively. Sophistication about how the loop works is not the same lever as the loop itself, and assuming it is happens to be exactly the mistake that leaves the most informed people in the room the most exposed.',
       ],
     },
@@ -162,7 +162,7 @@ export const deepDive: DeepDive = {
     },
     {
       source: 'Clark, Lawrence, Astley-Jones & Gray, “Gambling Near-Misses Enhance Motivation to Gamble and Recruit Win-Related Brain Circuitry” (Neuron, 2009)',
-      finding: 'Near-miss outcomes on slot-machine-style tasks activate reward-related brain circuitry similarly to actual wins, despite being informationally identical to any other loss, especially in people with gambling problems.',
+      finding: 'Near-miss outcomes on slot-machine-style tasks activate reward-related brain circuitry similarly to actual wins in regular, non-clinical players, despite being informationally identical to any other loss. A follow-up (Chase & Clark, Journal of Neuroscience, 2010) found the midbrain response to near-misses scaled with gambling severity.',
     },
     {
       source: 'Schüll, “Addiction by Design: Machine Gambling in Las Vegas” (2012)',

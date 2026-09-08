@@ -3,7 +3,7 @@ import type { DeepDive } from '../../../types/curriculum';
 /** #10 · Sphere 1 · Effort Justification & Induced Compliance Dissonance */
 export const deepDive: DeepDive = {
   readingTimeMinutes: 14,
-  hook: 'You spend an hour turning wooden pegs a quarter-turn at a time. It is as boring as it sounds. Then the researcher asks a favour: the assistant who briefs the next participant has not shown up, would you mind telling her the task was interesting? He offers you a dollar. You do it. Afterwards someone asks how much you actually enjoyed the pegs. Leon Festinger and James Carlsmith ran this in 1959, and the participants paid one dollar reported liking the tedious task more than the participants paid twenty — a serious sum at the time. More money, less attitude change. The twenty-dollar group had a reason for saying something they did not believe. The one-dollar group had none, so their minds supplied one by quietly revising the belief. Nobody decided to do this.',
+  hook: 'You spend an hour on two tasks: half of it emptying and refilling a tray of spools, half of it turning wooden pegs a quarter-turn at a time. It is as boring as it sounds. Then the researcher asks a favour: the assistant who briefs the next participant has not shown up, would you mind telling her the task was interesting? He offers you a dollar. You do it. Afterwards someone asks how much you actually enjoyed the pegs. Leon Festinger and James Carlsmith ran this in 1959, and the participants paid one dollar reported liking the tedious task more than the participants paid twenty — a serious sum at the time. More money, less attitude change. The twenty-dollar group had a reason for saying something they did not believe. The one-dollar group had none, so their minds supplied one by quietly revising the belief. Nobody decided to do this.',
   sections: [
     {
       heading: 'Two engines, routinely confused',
@@ -156,7 +156,7 @@ export const deepDive: DeepDive = {
     },
     {
       source: 'Gerard & Mathewson, initiation replication (1966)',
-      finding: 'Reproduced the severity-of-initiation effect using electric shocks in place of embarrassing material, removing both the arousal and the relief explanations. The severity endured, not its content, drove liking for the group.',
+      finding: 'Reproduced the severity-of-initiation effect using electric shocks in place of embarrassing material, removing both the sexual-arousal and the relief explanations. The severity endured, not its content, drove liking for the group.',
     },
     {
       source: 'Norton, Mochon & Ariely, “The IKEA Effect” (2012)',

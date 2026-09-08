@@ -167,7 +167,7 @@ export const deepDive: DeepDive = {
     },
     {
       source: 'Fiske, relational models theory (1992)',
-      finding: 'People organize relationships into a small set of templates, communal sharing, authority ranking, market pricing, and naming an exchange inside a relationship coded as communal can feel damaging independent of the amount involved.',
+      finding: 'People organize relationships into four elementary models — communal sharing, authority ranking, equality matching and market pricing — and naming an exchange inside a relationship coded as communal can feel damaging independent of the amount involved.',
     },
     {
       source: 'Schelling, The Strategy of Conflict (1960)',

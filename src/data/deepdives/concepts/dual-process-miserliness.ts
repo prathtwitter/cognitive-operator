@@ -157,7 +157,7 @@ export const deepDive: DeepDive = {
     },
     {
       source: 'Stanovich & West (2000); Stanovich on dysrationalia',
-      finding: 'Introduced the Type 1 / Type 2 terminology and separated computational capacity from the disposition to engage it. Rationality and intelligence are measurably distinct.',
+      finding: 'Introduced the System 1 / System 2 terminology later popularised by Kahneman — Stanovich and Evans subsequently moved to Type 1 / Type 2 precisely to avoid implying two discrete architectures — and separated computational capacity from the disposition to engage it. Rationality and intelligence are measurably distinct.',
     },
     {
       source: 'Fiske & Taylor, Social Cognition (1984)',

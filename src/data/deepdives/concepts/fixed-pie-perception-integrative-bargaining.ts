@@ -11,7 +11,7 @@ export const deepDive: DeepDive = {
         'Fixed-pie perception isn’t a belief anyone would defend if asked directly — almost nobody thinks negotiation is always zero-sum. It operates beneath conscious belief, as a default processing habit: negotiators treat every point the other side gains as a point they lose, without checking. That’s why telling people “win-win deals exist” changes almost nothing — they already agree, and keep negotiating as if it were false anyway.',
         'The formal split is between distributive bargaining — dividing a fixed quantity of one thing — and integrative bargaining, which trades across several things valued differently by each side. Bazerman and Neale’s research, and Raiffa’s earlier mathematical treatment of negotiation, both center on this: claiming a larger share of one pie versus building a bigger, differently-shaped one. Lax and Sebenius named the two activities claiming value and creating value, because most negotiators are fluent in the first and rusty at the second.',
         'The failure lives in a specific gap: discovering a trade requires a diagnostic question, not a leading one, and almost nobody asks it under pressure. “Would you accept $2.20?” tests a position. “What matters more to you, price or delivery time?” tests a structure. Instinct optimizes for the first kind, because it feels like progress. Only the second kind actually locates a trade.',
-        'Thompson and Hastie’s research found the sharper version of this failure: most negotiators, even with real information available if they’d asked for it, couldn’t identify issues where they and their counterpart actually wanted the same outcome — fully compatible issues, not just tradeable ones. That’s a worse miss than failing to logroll, since compatible value costs nobody a concession. It just has to be noticed.',
+        'Thompson and Hastie’s research found the sharper version of this failure: a substantial share of negotiators, even with real information available if they’d asked for it, couldn’t identify issues where they and their counterpart actually wanted the same outcome — fully compatible issues, not just tradeable ones. That’s a worse miss than failing to logroll, since compatible value costs nobody a concession. It just has to be noticed.',
       ],
     },
     {
@@ -27,7 +27,7 @@ export const deepDive: DeepDive = {
       body: [
         'The technique that captures the value fixed-pie perception hides is logrolling, formalized by Pruitt and Lewis: trading concessions across issues the two sides rank differently, so each side gives up something low on its own list for something high on it — a jointly better outcome than any single-issue split. This differs from compromise. Splitting every issue down the middle feels fair, but is still a fixed-pie habit; it just applies the habit to more variables instead of one.',
         'The hard step: you need the other side’s ranking, and can’t just ask “what matters most?” and expect a clean answer. A counterpart may name a fake low priority purely to “generously concede” it later for their real target. Even an honest answer gets discounted — Ross’s work on reactive devaluation found a stated position is routinely devalued for no reason but where it came from, so a genuinely low priority can still read as a bluff.',
-        'The concrete answer: stop asking single questions and offer packages. Multiple equivalent simultaneous offers — from Leigh Thompson’s negotiation research — present two or three proposals costing you the same but differing sharply in composition: price-heavy, exclusivity-heavy, volume-heavy. You’re indifferent among them. The counterpart isn’t, and which one they gravitate toward reveals their ranking without a question they could deflect or an answer they could regret.',
+        'The concrete answer: stop asking single questions and offer packages. Multiple equivalent simultaneous offers — developed by Victoria Medvec and Adam Galinsky — present two or three proposals costing you the same but differing sharply in composition: price-heavy, exclusivity-heavy, volume-heavy. You’re indifferent among them. The counterpart isn’t, and which one they gravitate toward reveals their ranking without a question they could deflect or an answer they could regret.',
       ],
       example: {
         label: 'A worked trade',
@@ -37,7 +37,7 @@ export const deepDive: DeepDive = {
     {
       heading: 'Sophistication makes people more suspicious, not more generous',
       body: [
-        'Experience with a deal’s substance — the industry, the pricing — doesn’t touch this failure, because it isn’t about domain knowledge. Bazerman and Neale’s research, run on trained MBA students and later on practicing managers, found fixed-pie perception at rates not meaningfully better than novices. Knowing the market cold says nothing about your specific counterpart’s priorities today, which is the only knowledge that actually prevents the error.',
+        'Experience with a deal’s substance — the industry, the pricing — doesn’t touch this failure, because it isn’t about domain knowledge. Neale and Northcraft’s research, run on both student negotiators and practising professionals, found experienced negotiators making the same judgment errors at rates not meaningfully better than novices. Knowing the market cold says nothing about your specific counterpart’s priorities today, which is the only knowledge that actually prevents the error.',
         'Worse, sophistication can work against discovery through reactive devaluation. Once a negotiator knows counterparts sometimes misrepresent priorities to extract cheap concessions, the rational response is to discount whatever the other side says. That protects against being played — and blocks any real logrolling offered honestly, because the correctly paranoid negotiator can no longer receive true information as true.',
         'This produces an ironic pattern: the more rounds of back-and-forth two sophisticated parties go through, the more each side’s stated priorities get treated as noise, and the more the conversation collapses back onto the one variable neither side can fake — price — the exact fixed-pie battleground the research shows people default to.',
         'The uncomfortable conclusion: “we have experienced negotiators on this deal” is not a control against fixed-pie perception, for the same reason raw intelligence isn’t a control elsewhere in this field guide. The failure runs through a default assumption and a rational defense against exploitation — not a skill deficit years of deal-making would fix.',
@@ -147,7 +147,7 @@ export const deepDive: DeepDive = {
   evidence: [
     {
       source: 'Thompson & Hastie, “Social Perception in Negotiation” (1990)',
-      finding: 'Studied negotiator pairs with real, discoverable information about each other’s priorities and found most failed to identify issues where they and their counterpart actually wanted the same outcome — a more basic failure than failing to logroll, since compatible issues cost nobody a concession.',
+      finding: 'Studied negotiator pairs with real, discoverable information about each other’s priorities and found a substantial share failed to identify issues where they and their counterpart actually wanted the same outcome — a more basic failure than failing to logroll, since compatible issues cost nobody a concession.',
     },
     {
       source: 'Pruitt & Lewis, integrative bargaining research (1975)',
@@ -171,9 +171,14 @@ export const deepDive: DeepDive = {
       finding: 'Showed a proposal or concession is often devalued by the receiving party for no reason but that it came from an adversary — explaining why sophisticated negotiators can rationally distrust an honest disclosure of low priority.',
     },
     {
-      source: 'Thompson, multiple equivalent simultaneous offers (MESO)',
+      source: 'Medvec & Galinsky, multiple equivalent simultaneous offers (MESO)',
       finding: 'Describes presenting several equal-value packages of different composition, then reading the counterpart’s reaction across them to infer a priority ranking without a single, easily-bluffed question.',
       caveat: 'Much of this evidence, including MESO’s effectiveness, comes from lab and classroom exercises rather than audited real deals. Treat it as a strong prior worth testing, not a guarantee.',
+    },
+    {
+      source: 'Neale & Northcraft (1986); Northcraft & Neale (1987)',
+      finding: 'Compared experienced negotiators and real-estate professionals against novices and found comparable rates of the same negotiation judgment errors, including anchoring.',
+      caveat: '“Comparable rates” comes from a small set of studies on specific tasks; read it as “experience is not a reliable control” rather than as a precise equivalence.',
     },
   ],
   takeaways: [

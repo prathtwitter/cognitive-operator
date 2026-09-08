@@ -43,7 +43,7 @@ export const deepDive: DeepDive = {
       ],
       example: {
         label: 'Loaded dice on the bench',
-        body: 'In studies run by Birte Englich and colleagues, experienced judges and prosecutors first rolled a pair of dice they had been told, and could see, were rigged to land on either a low or a high number. They were then asked to recommend a sentence for a described offense. Recommendations skewed higher after a high roll and lower after a low one, despite the roll having no connection whatsoever to the case, and despite every participant being a trained legal professional aware that dice carry no evidentiary weight.',
+        body: 'In studies run by Birte Englich and colleagues, experienced judges and prosecutors first rolled a pair of dice which, unknown to them, were loaded to produce either a low or a high total. They were then asked to recommend a sentence for a described offense. Recommendations skewed higher after a high roll and lower after a low one, despite the roll being — as every participant understood it — a matter of pure chance with no connection whatsoever to the case, and despite every participant being a trained legal professional aware that dice carry no evidentiary weight. The anchor did not need to be credible. It only needed to be the number in mind.',
       },
     },
     {
@@ -58,7 +58,7 @@ export const deepDive: DeepDive = {
     {
       heading: 'The honest limits, and where focal points earn their name',
       body: [
-        'Grade your confidence by which claim you are making. Classic comparative anchoring, the kind Tversky and Kahneman demonstrated, is one of the more robustly replicated findings in the behavioral sciences: the Many Labs replication projects reproduced it across a large number of independent samples, in contrast to several other famous effects from the same era that did not survive the same scrutiny.',
+        'Grade your confidence by which claim you are making. Classic comparative anchoring, the kind Tversky and Kahneman demonstrated, is one of the more robustly replicated findings in the behavioral sciences: Many Labs 1 reproduced it in 2014 across a large number of independent samples, in contrast to several other famous effects from the same era that did not survive the same scrutiny. Incidental anchoring did not fare nearly so well, which is the whole reason the tiers matter.',
         'Incidental and arbitrary anchors sit on a shakier tier of the same idea. Dan Ariely, George Loewenstein and Drazen Prelec found that people’s own social security digits, written down for an unrelated reason, correlated with how much they later bid for ordinary goods. The effect is real and has been replicated, but it is smaller and more variable than classic comparative anchoring, and the weakest versions, brief or subliminal numeric priming, sit inside the wider replication problems that have hit priming research generally.',
         'Schelling’s focal points rest on a different evidentiary foundation: demonstration and game-theoretic logic more than large controlled trials, though later experimental work, notably by Judith Mehta, Chris Starmer and Robert Sugden, found people really do converge on labeled, salient options in coordination games far more often than a symmetric guess would predict. Treat this as good support for the concept, not as evidence carrying the same statistical weight as the anchoring literature.',
         'Not every number spoken first is a focal point, and not every anchor is unbeatable. A focal point requires genuine, obvious mutual salience recognized by both sides without discussion. An anchor loses its grip the moment someone builds an independent estimate before hearing it. Mistaking either shortcut for magic is how two useful concepts turn into an excuse for skipping the calculation.',
@@ -130,7 +130,7 @@ export const deepDive: DeepDive = {
     },
     {
       misread: 'Anchoring is soft, hard-to-replicate psychology, like a lot of biases from the same era.',
-      correction: 'It is one of the more robustly replicated findings in the field. The Many Labs projects reproduced classic comparative anchoring across the large majority of samples tested, unlike several other famous effects from the same period.',
+      correction: 'It is one of the more robustly replicated findings in the field. Many Labs 1 reproduced classic comparative anchoring across the large majority of samples tested, unlike several other famous effects from the same period. Note the scope: that verdict covers comparative anchoring, not the incidental variety.',
     },
     {
       misread: 'Because classic anchoring is solid, every anchor claim, subliminal numbers, spun wheels, random digits, is equally well established.',
@@ -151,8 +151,9 @@ export const deepDive: DeepDive = {
       finding: 'Tested anchoring across many different quantity-estimation questions and found the effect pervasive and consistent across content domains, establishing the standard high-anchor and low-anchor paradigm used in most later research.',
     },
     {
-      source: 'Klein et al., the Many Labs replication projects (2014, 2018)',
-      finding: 'Replicated a battery of classic psychology findings across many independent laboratories and samples. Anchoring was among the most consistently reproduced effects tested, in contrast to several other classic findings from the same period that did not hold up.',
+      source: 'Klein et al., Many Labs 1 (2014)',
+      finding: 'Replicated a battery of classic psychology findings across many independent laboratories and samples. The four comparative anchoring items were among the most consistently reproduced effects tested, in contrast to several other classic findings from the same period that did not hold up.',
+      caveat: 'Read the scope carefully, because Many Labs 2 (2018) tested something different and got the opposite answer. It examined incidental environmental anchoring — the Critcher and Gilovich paradigm — across 125 samples, and that failed, with an effect indistinguishable from zero. Taken together the two projects are the cleanest available demonstration of the tier distinction this section draws: comparative anchoring is robust, incidental anchoring is not.',
     },
     {
       source: 'Northcraft & Neale, “Experts, Amateurs, and Real Estate” (1987)',

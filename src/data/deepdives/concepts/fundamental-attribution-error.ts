@@ -74,7 +74,7 @@ export const deepDive: DeepDive = {
     },
     {
       signal: 'The same failure gets a different explanation depending on which team produced it.',
-      meaning: 'In-group behaviour explained situationally, out-group behaviour dispositionally. This is the reliable half of the asymmetry.',
+      meaning: 'In-group behaviour explained situationally, out-group behaviour dispositionally. Note that the evidence here is weaker than for correspondence bias itself — Hewstone found only limited support for the intergroup version — so treat it as a pattern worth watching for rather than a law.',
     },
     {
       signal: 'Someone describes a colleague’s lapse in words they would never apply to themselves in the same spot.',

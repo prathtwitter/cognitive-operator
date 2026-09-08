@@ -3,7 +3,7 @@ import type { DeepDive } from '../../../types/curriculum';
 /** #03 · Sphere 1 · Naïve Realism & The Bias Blind Spot */
 export const deepDive: DeepDive = {
   readingTimeMinutes: 14,
-  hook: 'In the mid-1980s, Stanford researchers sat pro-Israeli and pro-Arab students in front of the same television news coverage of the same events in Lebanon. Not similar coverage. The identical tapes, same segments, same order, same edit. Both groups came out convinced the coverage had been biased against their side. Both could point to specific passages as proof. And both predicted that a neutral viewer watching those exact tapes would come away more hostile to their side than before. Two groups, one videotape, two opposite and confidently detailed accounts of what was on it. Nobody was lying, and nobody was exaggerating for effect. Each group was reporting, honestly, what they had seen.',
+  hook: 'In 1982, Stanford researchers sat pro-Israeli and pro-Arab students in front of the same television news coverage of the same events in Lebanon. Not similar coverage. The identical tapes, same segments, same order, same edit. Both groups came out convinced the coverage had been biased against their side. Both could point to specific passages as proof. And both predicted that a neutral viewer watching those exact tapes would come away more hostile to their side than before. Two groups, one videotape, two opposite and confidently detailed accounts of what was on it. Nobody was lying, and nobody was exaggerating for effect. Each group was reporting, honestly, what they had seen.',
   sections: [
     {
       heading: 'Three claims stacked on each other, and the third is expensive',

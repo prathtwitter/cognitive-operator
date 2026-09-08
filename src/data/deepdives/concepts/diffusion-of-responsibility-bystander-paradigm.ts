@@ -49,12 +49,12 @@ export const deepDive: DeepDive = {
       body: [
         'Ambiguity is the master variable. When it is unmistakable that something is wrong, the effect shrinks dramatically. Fischer and colleagues, in a meta-analysis of more than a hundred studies, found the effect confirmed overall but substantially attenuated — and in some conditions reversed — when the emergency was clearly dangerous, a perpetrator was present, or bystanders could physically assist. In a genuine physical emergency other people stop being competitors for responsibility and start being potential support. More bystanders means better odds, not worse.',
         'Visibility and identifiability cut in opposite directions, and both are levers. Diffusion needs you to know that other capable people are present, which is why the same crisis raised one-to-one on a phone call gets acted on immediately and raised in a group thread does not. But if the group knows who you are and will remember you were there, the effect weakens again — anonymity strengthens it. That combination is why large open channels are structurally worse than small named groups for anything that requires someone to move.',
-        'Relationship matters, and the effect is large. Latané and Rodin found the inhibition largely vanished when the other bystander was a friend rather than a stranger — roughly seven in ten helped when alone, well under one in ten with a passive stranger, and back to alone-levels with someone they knew. Friends can resolve ambiguity out loud; they can say “is that normal?” to each other. Strangers cannot, so they resolve it by watching each other stay still.',
+        'Relationship matters, and the effect is large. Latané and Rodin found the inhibition was substantially reduced when the other bystander was a friend rather than a stranger. Roughly seven in ten helped when alone; well under one in ten helped with a passive stranger present; pairs of friends helped significantly more often and significantly faster than pairs of strangers — though still below what two people acting independently would have produced. Friends can resolve ambiguity out loud; they can say “is that normal?” to each other. Strangers cannot, so they resolve it by watching each other stay still.',
         'Competence matters too. Being the only person who plausibly can act eliminates diffusion completely, which makes “who here has handled one of these before?” unusually powerful: either it recruits someone qualified, or the silence establishes that you are the only candidate and the freeze breaks on its own.',
       ],
       example: {
         label: 'The friend condition',
-        body: 'The single cheapest counter-measure available to an individual is to bring the ambiguity into the open with one other person. Say out loud, to someone specific: “That does not look right to me — am I reading this wrong?” It costs almost nothing, it converts a stranger into a temporary ally, and it directly attacks pluralistic ignorance by making one person’s private read public. In the studies, this is roughly the difference between the friend condition and the stranger condition, and it is the largest single effect in the paradigm that an individual can produce unilaterally.',
+        body: 'The single cheapest counter-measure available to an individual is to bring the ambiguity into the open with one other person. Say out loud, to someone specific: “That does not look right to me — am I reading this wrong?” It costs almost nothing, it converts a stranger into a temporary ally, and it directly attacks pluralistic ignorance by making one person’s private read public. In the studies, this is roughly the difference between the friend condition and the stranger condition, and it is an effect an individual can produce unilaterally.',
       },
     },
     {
@@ -158,7 +158,7 @@ export const deepDive: DeepDive = {
     },
     {
       source: 'Latané & Rodin, the falling bookcase (1969)',
-      finding: 'About seven in ten participants alone went to help after hearing a woman fall in the next room. With a passive stranger present, well under one in ten did. With a friend present, helping returned close to the alone rate — friends can resolve ambiguity by talking to each other.',
+      finding: 'About seven in ten participants alone went to help after hearing a woman fall in the next room. With a passive stranger present, well under one in ten did. Friend pairs helped substantially more often and faster than stranger pairs, though still short of the rate expected if the two had acted independently — friends can resolve ambiguity by talking to each other.',
     },
     {
       source: 'Latané & Darley’s five-step decision model',
