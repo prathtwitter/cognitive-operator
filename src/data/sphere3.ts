@@ -239,14 +239,14 @@ export const SPHERE_3_CONCEPTS: Concept[] = [
     numberInSphere: 5,
     globalIndex: 25,
     title: 'Tit-for-Tat & Retaliatory Discipline in Iterated Games',
-    tagline: 'The mathematically proven code for long-term respect: be nice, retaliate immediately when betrayed, forgive instantly when they reform, and be crystal clear.',
+    tagline: 'The best-tested code for long-term respect: be nice, retaliate immediately when betrayed, forgive instantly when they reform, and be crystal clear.',
     plainEnglishAnalogy: 'The Friendly Golden Retriever That Bites Back Instantly',
     everydayHumanBehavior: 'Think of that coworker who is always cheerful and cooperative, but the second someone takes credit for their project, they immediately send an email with receipts to the entire department. Once the boundary is re-established, they smile and get back to work with zero personal grudge. People who are always nice get walked all over. People who are always mean get fired. The winning formula is: start friendly, hit back immediately if cheated, and forgive the moment cooperation resumes.',
     formalTerminology: {
       primaryTerm: 'Tit-for-Tat & Iterated Prisoner\'s Dilemma Strategies',
       subConstructs: ['The Shadow of the Future', 'Immediate Provocability', 'Forgiveness Kinetics'],
       keyThinkers: ['Robert Axelrod', 'William Hamilton', 'John Maynard Smith'],
-      definition: 'The dominant game-theoretic strategy in repeated social interactions with no fixed end date. Tit-for-Tat follows four strict rules: (1) Nice: Never defect first; (2) Retaliatory: Immediately punish any betrayal on the very next move; (3) Forgiving: Instantly resume cooperation the moment the other party stops defecting; (4) Clear: Be predictable so the counterparty cannot misinterpret your incentives.',
+      definition: 'A strong and unusually robust strategy for repeated social interactions with no fixed end date — the winner of both of Axelrod\'s tournaments, though not provably optimal in every environment. Tit-for-Tat follows four strict rules: (1) Nice: Never defect first; (2) Retaliatory: Immediately punish any betrayal on the very next move; (3) Forgiving: Instantly resume cooperation the moment the other party stops defecting; (4) Clear: Be predictable so the counterparty cannot misinterpret your incentives.',
     },
     underlyingMechanism: {
       evolutionaryDriver: 'Organisms that were unconditionally nice were exploited to extinction. Organisms that were unconditionally hostile spent all their energy in bloody wars. Tit-for-tat created stable, thriving coalitions.',
@@ -304,7 +304,7 @@ export const SPHERE_3_CONCEPTS: Concept[] = [
       primaryTerm: 'Affect Labeling & Tactical Empathy',
       subConstructs: ['Amygdala Down-Regulation', 'Right Ventrolateral PFC Activation', 'Vossian Labeling Dynamics'],
       keyThinkers: ['Matthew Lieberman', 'Chris Voss', 'James Gross'],
-      definition: 'The linguistic practice of putting feelings into words by identifying and neutrally stating an interlocutor\'s emotional state (e.g. "It seems like you feel unappreciated"). Mechanistically, this transfers neural activity from the limbic system to the prefrontal cortex, de-escalating physiological arousal without agreeing with their demands.',
+      definition: 'The linguistic practice of putting feelings into words by identifying and neutrally stating an interlocutor\'s emotional state (e.g. "It seems like you feel unappreciated"). Neuroimaging associates this with reduced amygdala activity and increased right ventrolateral prefrontal activity, consistent with — though not proof of — down-regulated physiological arousal, without agreeing with their demands.',
     },
     underlyingMechanism: {
       evolutionaryDriver: 'A panicking or enraged human was an imminent physical danger to the ancestral band. Calming them without violence required signaling that their distress alarm had been clearly heard and registered.',

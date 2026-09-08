@@ -11,7 +11,7 @@ interface VaultViewProps {
 }
 
 export const VaultView: React.FC<VaultViewProps> = ({ onSelectConcept, onExploreCurriculum }) => {
-  const { bookmarkedConceptIds, completedConceptIds, stats } = useUserProgress();
+  const { bookmarkedConceptIds, completedConceptIds, stats, resetProgress } = useUserProgress();
 
   const bookmarkedConcepts = bookmarkedConceptIds
     .map(id => getConceptById(id))
@@ -22,9 +22,12 @@ export const VaultView: React.FC<VaultViewProps> = ({ onSelectConcept, onExplore
     .filter((c): c is Concept => c !== undefined);
 
   const handleClearProgress = () => {
-    if (window.confirm('Are you sure you want to reset all bookmarks and mastery progress?')) {
-      localStorage.clear();
-      window.location.reload();
+    if (
+      window.confirm(
+        'Reset all Cognitive Operator bookmarks, mastery flags and drill scores? This cannot be undone.'
+      )
+    ) {
+      resetProgress();
     }
   };
 
@@ -134,10 +137,11 @@ export const VaultView: React.FC<VaultViewProps> = ({ onSelectConcept, onExplore
 
       {/* Reset Vault Settings */}
       <div className="pt-6 border-t border-zinc-800/80 flex items-center justify-between text-xs text-zinc-500">
-        <span>Stored offline in local browser cache.</span>
+        <span>Stored offline in this browser only — nothing leaves the device.</span>
         <button
+          type="button"
           onClick={handleClearProgress}
-          className="flex items-center gap-1 text-rose-400/80 hover:text-rose-300 transition-colors"
+          className="flex items-center gap-1 text-rose-400/80 hover:text-rose-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 rounded"
         >
           <Trash2 className="h-3.5 w-3.5" />
           <span>Reset Vault Data</span>

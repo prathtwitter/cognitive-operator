@@ -1,20 +1,16 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { SphereId } from '../types/curriculum';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ALL_CONCEPTS } from '../data';
 
 interface UserProgressContextType {
   completedConceptIds: string[];
   bookmarkedConceptIds: string[];
   scenarioScores: Record<string, boolean>;
-  selectedSphereId: SphereId | 'all';
-  searchQuery: string;
-  setSelectedSphereId: (id: SphereId | 'all') => void;
-  setSearchQuery: (query: string) => void;
   toggleComplete: (id: string) => void;
   toggleBookmark: (id: string) => void;
   isCompleted: (id: string) => boolean;
   isBookmarked: (id: string) => boolean;
   recordQuizResult: (scenarioId: string, passed: boolean) => void;
+  resetProgress: () => void;
   stats: {
     total: number;
     completed: number;
@@ -29,115 +25,132 @@ const STORAGE_KEYS = {
   COMPLETED: 'cog_operator_completed_v1',
   BOOKMARKED: 'cog_operator_bookmarked_v1',
   SCORES: 'cog_operator_scores_v1',
-};
+} as const;
+
+function readStored<T>(key: string, fallback: T): T {
+  try {
+    const saved = localStorage.getItem(key);
+    return saved ? (JSON.parse(saved) as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function writeStored(key: string, value: unknown): void {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // Private mode or quota exhausted — progress simply will not persist.
+  }
+}
 
 export const UserProgressProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [completedConceptIds, setCompletedConceptIds] = useState<string[]>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEYS.COMPLETED);
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [completedConceptIds, setCompletedConceptIds] = useState<string[]>(() =>
+    readStored<string[]>(STORAGE_KEYS.COMPLETED, [])
+  );
 
-  const [bookmarkedConceptIds, setBookmarkedConceptIds] = useState<string[]>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEYS.BOOKMARKED);
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [bookmarkedConceptIds, setBookmarkedConceptIds] = useState<string[]>(() =>
+    readStored<string[]>(STORAGE_KEYS.BOOKMARKED, [])
+  );
 
-  const [scenarioScores, setScenarioScores] = useState<Record<string, boolean>>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEYS.SCORES);
-      return saved ? JSON.parse(saved) : {};
-    } catch {
-      return {};
-    }
-  });
-
-  const [selectedSphereId, setSelectedSphereId] = useState<SphereId | 'all'>('all');
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [scenarioScores, setScenarioScores] = useState<Record<string, boolean>>(() =>
+    readStored<Record<string, boolean>>(STORAGE_KEYS.SCORES, {})
+  );
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEYS.COMPLETED, JSON.stringify(completedConceptIds));
-    } catch (e) {
-      console.error(e);
-    }
+    writeStored(STORAGE_KEYS.COMPLETED, completedConceptIds);
   }, [completedConceptIds]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEYS.BOOKMARKED, JSON.stringify(bookmarkedConceptIds));
-    } catch (e) {
-      console.error(e);
-    }
+    writeStored(STORAGE_KEYS.BOOKMARKED, bookmarkedConceptIds);
   }, [bookmarkedConceptIds]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEYS.SCORES, JSON.stringify(scenarioScores));
-    } catch (e) {
-      console.error(e);
-    }
+    writeStored(STORAGE_KEYS.SCORES, scenarioScores);
   }, [scenarioScores]);
 
-  const toggleComplete = (id: string) => {
-    setCompletedConceptIds(prev => 
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+  const completedSet = useMemo(() => new Set(completedConceptIds), [completedConceptIds]);
+  const bookmarkedSet = useMemo(() => new Set(bookmarkedConceptIds), [bookmarkedConceptIds]);
+
+  const toggleComplete = useCallback((id: string) => {
+    setCompletedConceptIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
-  };
+  }, []);
 
-  const toggleBookmark = (id: string) => {
-    setBookmarkedConceptIds(prev => 
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+  const toggleBookmark = useCallback((id: string) => {
+    setBookmarkedConceptIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
-  };
+  }, []);
 
-  const isCompleted = (id: string) => completedConceptIds.includes(id);
-  const isBookmarked = (id: string) => bookmarkedConceptIds.includes(id);
+  const isCompleted = useCallback((id: string) => completedSet.has(id), [completedSet]);
+  const isBookmarked = useCallback((id: string) => bookmarkedSet.has(id), [bookmarkedSet]);
 
-  const recordQuizResult = (scenarioId: string, passed: boolean) => {
-    setScenarioScores(prev => ({ ...prev, [scenarioId]: passed }));
-  };
+  /**
+   * Keep the best attempt. Re-opening a scenario you already passed and picking a
+   * wrong option to read its explanation must not silently erase the pass.
+   */
+  const recordQuizResult = useCallback((scenarioId: string, passed: boolean) => {
+    setScenarioScores((prev) =>
+      prev[scenarioId] === true ? prev : { ...prev, [scenarioId]: passed }
+    );
+  }, []);
 
-  const total = ALL_CONCEPTS.length;
-  const completed = completedConceptIds.length;
-  const bookmarked = bookmarkedConceptIds.length;
-  const progressPercentage = Math.round((completed / total) * 100);
+  /**
+   * Clear only this app's keys. `localStorage.clear()` would wipe every other app
+   * sharing the origin — which is the case on a shared github.io domain.
+   */
+  const resetProgress = useCallback(() => {
+    for (const key of Object.values(STORAGE_KEYS)) {
+      try {
+        localStorage.removeItem(key);
+      } catch {
+        // Ignore — in-memory state below is still reset.
+      }
+    }
+    setCompletedConceptIds([]);
+    setBookmarkedConceptIds([]);
+    setScenarioScores({});
+  }, []);
 
-  return (
-    <UserProgressContext.Provider
-      value={{
-        completedConceptIds,
-        bookmarkedConceptIds,
-        scenarioScores,
-        selectedSphereId,
-        searchQuery,
-        setSelectedSphereId,
-        setSearchQuery,
-        toggleComplete,
-        toggleBookmark,
-        isCompleted,
-        isBookmarked,
-        recordQuizResult,
-        stats: {
-          total,
-          completed,
-          bookmarked,
-          progressPercentage,
-        },
-      }}
-    >
-      {children}
-    </UserProgressContext.Provider>
-  );
+  const value = useMemo<UserProgressContextType>(() => {
+    const total = ALL_CONCEPTS.length;
+    const completed = completedConceptIds.length;
+
+    return {
+      completedConceptIds,
+      bookmarkedConceptIds,
+      scenarioScores,
+      toggleComplete,
+      toggleBookmark,
+      isCompleted,
+      isBookmarked,
+      recordQuizResult,
+      resetProgress,
+      stats: {
+        total,
+        completed,
+        bookmarked: bookmarkedConceptIds.length,
+        progressPercentage: total === 0 ? 0 : Math.round((completed / total) * 100),
+      },
+    };
+  }, [
+    completedConceptIds,
+    bookmarkedConceptIds,
+    scenarioScores,
+    toggleComplete,
+    toggleBookmark,
+    isCompleted,
+    isBookmarked,
+    recordQuizResult,
+    resetProgress,
+  ]);
+
+  return <UserProgressContext.Provider value={value}>{children}</UserProgressContext.Provider>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useUserProgress = () => {
   const context = useContext(UserProgressContext);
   if (!context) {

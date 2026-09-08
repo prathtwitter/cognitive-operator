@@ -2,45 +2,26 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Search, X, Zap, ChevronRight } from 'lucide-react';
 import { ALL_CONCEPTS } from '../data';
 import type { Concept } from '../types/curriculum';
+import { useDialog } from '../lib/useDialog';
 
 interface SearchDialogProps {
-  isOpen: boolean;
   onClose: () => void;
   onSelectConcept: (concept: Concept) => void;
 }
 
-export const SearchDialog: React.FC<SearchDialogProps> = ({
-  isOpen,
-  onClose,
-  onSelectConcept,
-}) => {
+const MAX_RESULTS = 8;
+
+/** Rendered only while open, so each launch starts from a clean, empty query. */
+export const SearchDialog: React.FC<SearchDialogProps> = ({ onClose, onSelectConcept }) => {
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const panelRef = useDialog(true, onClose);
 
   useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 50);
-    } else {
-      setQuery('');
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        if (isOpen) onClose();
-        else {
-          // Open search triggered globally
-        }
-      }
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+    // Defer so the panel focus applied by useDialog does not win the race.
+    const timer = setTimeout(() => inputRef.current?.focus(), 50);
+    return () => clearTimeout(timer);
+  }, []);
 
   const results = useMemo(() => {
     if (!query.trim()) return [];
@@ -51,45 +32,67 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
       const matchTagline = c.tagline.toLowerCase().includes(q);
       const matchThinker = c.formalTerminology.keyThinkers.some(t => t.toLowerCase().includes(q));
       const matchDef = c.formalTerminology.definition.toLowerCase().includes(q);
-      const matchWeapon = c.conversationalWeaponry.some(w => 
+      const matchWeapon = c.conversationalWeaponry.some(w =>
         w.phrase.toLowerCase().includes(q) || w.situation.toLowerCase().includes(q)
       );
       const matchTag = c.tags.some(t => t.toLowerCase().includes(q));
 
       return matchTitle || matchTagline || matchThinker || matchDef || matchWeapon || matchTag;
-    }).slice(0, 8);
+    }).slice(0, MAX_RESULTS);
   }, [query]);
 
-  if (!isOpen) return null;
+  const select = (concept: Concept) => {
+    onSelectConcept(concept);
+    onClose();
+  };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-sm">
-      <div 
-        className="w-full max-w-xl rounded-2xl border border-zinc-800 bg-[#0c0e15] shadow-2xl overflow-hidden"
+    <div
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Search concepts and tactics"
+        tabIndex={-1}
+        className="w-full max-w-xl rounded-2xl border border-zinc-800 bg-[#0c0e15] shadow-2xl overflow-hidden focus:outline-none"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
         <div className="flex items-center gap-3 border-b border-zinc-800 px-4 py-3 bg-zinc-900/60">
-          <Search className="h-5 w-5 text-zinc-400" />
+          <Search className="h-5 w-5 text-zinc-400" aria-hidden="true" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && results.length > 0) {
+                e.preventDefault();
+                select(results[0]);
+              }
+            }}
             placeholder="Search concepts, thinkers (Kahneman, Schelling), or tactics..."
+            aria-label="Search concepts, thinkers, or tactics"
             className="flex-1 bg-transparent text-sm text-white placeholder-zinc-500 focus:outline-none"
           />
           {query && (
             <button
+              type="button"
               onClick={() => setQuery('')}
-              className="rounded p-1 text-zinc-400 hover:text-zinc-200"
+              className="rounded p-1 text-zinc-400 hover:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+              aria-label="Clear search"
             >
               <X className="h-4 w-4" />
             </button>
           )}
           <button
+            type="button"
             onClick={onClose}
-            className="rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] font-mono text-zinc-400 hover:text-zinc-200"
+            className="rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] font-mono text-zinc-400 hover:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+            aria-label="Close search"
           >
             ESC
           </button>
@@ -99,7 +102,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
         <div className="max-h-96 overflow-y-auto p-2 divide-y divide-zinc-800/40">
           {query && results.length === 0 && (
             <div className="p-8 text-center text-xs text-zinc-500">
-              No matching concepts or tactics found for "{query}". Try searching by thinker or situation.
+              No matching concepts or tactics found for “{query}”. Try searching by thinker or situation.
             </div>
           )}
 
@@ -110,13 +113,11 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
           )}
 
           {results.map((concept) => (
-            <div
+            <button
               key={concept.id}
-              onClick={() => {
-                onSelectConcept(concept);
-                onClose();
-              }}
-              className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-900/80 cursor-pointer transition-colors group"
+              type="button"
+              onClick={() => select(concept)}
+              className="w-full text-left flex items-center justify-between p-3 rounded-xl hover:bg-zinc-900/80 cursor-pointer transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
             >
               <div className="flex-1 pr-3">
                 <div className="flex items-center gap-2 mb-1">
@@ -141,7 +142,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
                 </div>
               </div>
               <ChevronRight className="h-4 w-4 text-zinc-600 group-hover:text-zinc-300 transition-transform group-hover:translate-x-0.5" />
-            </div>
+            </button>
           ))}
         </div>
       </div>

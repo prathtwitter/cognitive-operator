@@ -1,11 +1,14 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { 
-  Brain, Users, Swords, Scale, ShieldAlert, Sparkles, 
-  CheckCircle2 
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  Brain, Users, Swords, Scale, ShieldAlert, Sparkles,
+  CheckCircle2
 } from 'lucide-react';
 import { UserProgressProvider, useUserProgress } from './context/UserProgressContext';
-import { SPHERES, ALL_CONCEPTS, CONCEPTS_BY_SPHERE } from './data';
+import { SPHERES, ALL_CONCEPTS, CONCEPTS_BY_SPHERE, getConceptByRef } from './data';
+import { prefetchDeepDives } from './data/deepdives';
 import type { Concept, SphereId } from './types/curriculum';
+import type { ContextTagFilter, DifficultyFilter, Route, TabId } from './lib/router';
+import { closeOverlay, navigate, TAB_TITLES, useRoute } from './lib/router';
 import { Navbar } from './components/Navbar';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { ConceptCard } from './components/ConceptCard';
@@ -14,45 +17,101 @@ import { FieldWeaponryView } from './components/FieldWeaponryView';
 import { ScenarioLabView } from './components/ScenarioLabView';
 import { VaultView } from './components/VaultView';
 import { SearchDialog } from './components/SearchDialog';
+import { DeepDiveReader } from './components/DeepDiveReader';
+
+const SPHERE_ICONS: Record<SphereId, React.ComponentType<{ className?: string }>> = {
+  'internal-architecture': Brain,
+  'social-dynamics': Users,
+  'strategic-interactions': Swords,
+  'behavioral-economics': Scale,
+};
 
 const AppContent: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'curriculum' | 'weaponry' | 'scenarios' | 'vault'>('curriculum');
-  const [selectedSphereId, setSelectedSphereId] = useState<SphereId | 'all'>('all');
-  const [difficultyFilter, setDifficultyFilter] = useState<'All' | 'Foundational' | 'Advanced' | 'Lethal'>('All');
-  const [selectedConcept, setSelectedConcept] = useState<Concept | null>(null);
+  const route = useRoute();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-
   const { stats } = useUserProgress();
 
-  // Keyboard shortcut Cmd+K or Ctrl+K
+  const { tab: activeTab, sphere: selectedSphereId, difficulty: difficultyFilter } = route;
+  const selectedConcept = route.conceptRef ? getConceptByRef(route.conceptRef) ?? null : null;
+
+  const go = useCallback(
+    (patch: Partial<Route>, options?: { replace?: boolean }) => {
+      navigate({ ...route, ...patch }, options);
+    },
+    [route]
+  );
+
+  const setActiveTab = useCallback(
+    (tab: TabId) => go({ tab, conceptRef: null }),
+    [go]
+  );
+
+  /** Opening from a card/search pushes, so Back (and the close button) dismisses it. */
+  const openConcept = useCallback(
+    (concept: Concept) => go({ conceptRef: String(concept.globalIndex) }),
+    [go]
+  );
+
+  /**
+   * Paging prev/next *inside* the modal replaces instead, otherwise closing after
+   * browsing ten concepts would walk back through all ten.
+   */
+  const replaceConcept = useCallback(
+    (concept: Concept) => go({ conceptRef: String(concept.globalIndex) }, { replace: true }),
+    [go]
+  );
+
+  const closeConcept = useCallback(
+    () => closeOverlay({ ...route, conceptRef: null, reading: false }),
+    [route]
+  );
+
+  const openReader = useCallback(
+    (concept: Concept) => go({ conceptRef: String(concept.globalIndex), reading: true }),
+    [go]
+  );
+
+  const closeReader = useCallback(
+    () => closeOverlay({ ...route, reading: false }),
+    [route]
+  );
+
+  // Warm the code-split deep-dive chunks once idle, so an installed PWA has the
+  // whole library cached before it is ever opened offline.
+  useEffect(() => {
+    prefetchDeepDives();
+  }, []);
+
+  // Keyboard shortcut: Cmd+K / Ctrl+K opens the omnibar.
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        setIsSearchOpen(true);
+        setIsSearchOpen((open) => !open);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const sphereIcons = {
-    'internal-architecture': Brain,
-    'social-dynamics': Users,
-    'strategic-interactions': Swords,
-    'behavioral-economics': Scale,
-  };
+  // Keep the tab/document title in sync so shared links and bookmarks are legible.
+  useEffect(() => {
+    const base = 'Cognitive Operator';
+    if (!selectedConcept) {
+      document.title = `${TAB_TITLES[activeTab]} · ${base}`;
+      return;
+    }
+    const prefix = route.reading ? 'Deep dive: ' : '';
+    document.title = `${prefix}#${selectedConcept.globalIndex} ${selectedConcept.title} · ${base}`;
+  }, [activeTab, selectedConcept, route.reading]);
 
   const filteredConcepts = useMemo(() => {
-    let concepts = selectedSphereId === 'all' 
-      ? ALL_CONCEPTS 
-      : CONCEPTS_BY_SPHERE[selectedSphereId];
+    const concepts =
+      selectedSphereId === 'all' ? ALL_CONCEPTS : CONCEPTS_BY_SPHERE[selectedSphereId];
 
-    if (difficultyFilter !== 'All') {
-      concepts = concepts.filter(c => c.difficulty === difficultyFilter);
-    }
-
-    return concepts;
+    return difficultyFilter === 'All'
+      ? concepts
+      : concepts.filter((c) => c.difficulty === difficultyFilter);
   }, [selectedSphereId, difficultyFilter]);
 
   return (
@@ -92,7 +151,7 @@ const AppContent: React.FC = () => {
                   <span>•</span>
                   <div className="flex items-center gap-1.5">
                     <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-                    <span>80+ Conversational Weapons</span>
+                    <span>80 Conversational Weapons</span>
                   </div>
                   <span>•</span>
                   <div className="flex items-center gap-1.5">
@@ -111,11 +170,13 @@ const AppContent: React.FC = () => {
                 </h2>
                 <div className="flex items-center gap-1.5 text-xs">
                   <span className="text-zinc-500 hidden sm:inline">Difficulty:</span>
-                  {(['All', 'Foundational', 'Advanced', 'Lethal'] as const).map((diff) => (
+                  {(['All', 'Foundational', 'Advanced', 'Lethal'] as const).map((diff: DifficultyFilter) => (
                     <button
                       key={diff}
-                      onClick={() => setDifficultyFilter(diff)}
-                      className={`rounded-lg px-2 py-1 text-[11px] font-semibold transition-colors ${
+                      type="button"
+                      onClick={() => go({ difficulty: diff }, { replace: true })}
+                      aria-pressed={difficultyFilter === diff}
+                      className={`rounded-lg px-2 py-1 text-[11px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 ${
                         difficultyFilter === diff
                           ? 'bg-zinc-800 text-cyan-400 border border-zinc-700'
                           : 'text-zinc-500 hover:text-zinc-300'
@@ -130,13 +191,17 @@ const AppContent: React.FC = () => {
               {/* Sphere Selector Buttons Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {SPHERES.map((sphere) => {
-                  const Icon = sphereIcons[sphere.id];
+                  const Icon = SPHERE_ICONS[sphere.id];
                   const isSelected = selectedSphereId === sphere.id;
                   return (
-                    <div
+                    <button
                       key={sphere.id}
-                      onClick={() => setSelectedSphereId(isSelected ? 'all' : sphere.id)}
-                      className={`cursor-pointer rounded-2xl border p-4 transition-all ${
+                      type="button"
+                      onClick={() =>
+                        go({ sphere: isSelected ? 'all' : sphere.id }, { replace: true })
+                      }
+                      aria-pressed={isSelected}
+                      className={`w-full text-left rounded-2xl border p-4 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 ${
                         isSelected
                           ? 'border-cyan-500 bg-cyan-950/20 shadow-lg shadow-cyan-950/30'
                           : 'border-zinc-800/80 bg-[#11131a] hover:border-zinc-700'
@@ -151,7 +216,9 @@ const AppContent: React.FC = () => {
                             Sphere {sphere.number}
                           </span>
                         </div>
-                        <span className="text-[10px] font-mono text-zinc-500">10 Models</span>
+                        <span className="text-[10px] font-mono text-zinc-500">
+                          {sphere.conceptsCount} Models
+                        </span>
                       </div>
                       <h3 className="text-sm font-bold text-white tracking-tight line-clamp-1">
                         {sphere.shortTitle}
@@ -159,7 +226,7 @@ const AppContent: React.FC = () => {
                       <p className="mt-1 text-xs text-zinc-400 line-clamp-2 leading-relaxed">
                         {sphere.tagline}
                       </p>
-                    </div>
+                    </button>
                   );
                 })}
               </div>
@@ -172,7 +239,8 @@ const AppContent: React.FC = () => {
                   Filtering by: <strong className="text-cyan-400">{SPHERES.find(s => s.id === selectedSphereId)?.title}</strong>
                 </span>
                 <button
-                  onClick={() => setSelectedSphereId('all')}
+                  type="button"
+                  onClick={() => go({ sphere: 'all' }, { replace: true })}
                   className="font-semibold text-cyan-400 hover:text-cyan-300"
                 >
                   Show All 40 Concepts
@@ -186,17 +254,27 @@ const AppContent: React.FC = () => {
                 <ConceptCard
                   key={concept.id}
                   concept={concept}
-                  onSelect={(c) => setSelectedConcept(c)}
+                  onSelect={openConcept}
                 />
               ))}
             </div>
+
+            {filteredConcepts.length === 0 && (
+              <div className="rounded-2xl border border-dashed border-zinc-800 p-8 text-center text-sm text-zinc-400">
+                No concepts match this sphere and difficulty combination.
+              </div>
+            )}
           </div>
         )}
 
         {/* VIEW 2: FIELD WEAPONRY ("In the Arena") */}
         {activeTab === 'weaponry' && (
           <FieldWeaponryView
-            onSelectConcept={(c) => setSelectedConcept(c)}
+            onSelectConcept={openConcept}
+            filterTag={route.tag}
+            searchQuery={route.q}
+            onFilterTagChange={(tag: ContextTagFilter) => go({ tag }, { replace: true })}
+            onSearchQueryChange={(q: string) => go({ q }, { replace: true })}
           />
         )}
 
@@ -208,7 +286,7 @@ const AppContent: React.FC = () => {
         {/* VIEW 4: VAULT / SAVED */}
         {activeTab === 'vault' && (
           <VaultView
-            onSelectConcept={(c) => setSelectedConcept(c)}
+            onSelectConcept={openConcept}
             onExploreCurriculum={() => setActiveTab('curriculum')}
           />
         )}
@@ -220,19 +298,33 @@ const AppContent: React.FC = () => {
         setActiveTab={setActiveTab}
       />
 
-      {/* Concept Deep Dive Modal */}
-      <ConceptDetailModal
-        concept={selectedConcept}
-        onClose={() => setSelectedConcept(null)}
-        onSelectConcept={(c) => setSelectedConcept(c)}
-      />
+      {/* Concept brief — keyed so per-concept UI state never leaks across concepts */}
+      {selectedConcept && (
+        <ConceptDetailModal
+          key={selectedConcept.id}
+          concept={selectedConcept}
+          onClose={closeConcept}
+          onSelectConcept={replaceConcept}
+          onReadDeepDive={openReader}
+        />
+      )}
+
+      {/* Long-form reading surface, layered above the brief */}
+      {selectedConcept && route.reading && (
+        <DeepDiveReader
+          key={`read-${selectedConcept.id}`}
+          concept={selectedConcept}
+          onClose={closeReader}
+        />
+      )}
 
       {/* Global Search Omnibar */}
-      <SearchDialog
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-        onSelectConcept={(c) => setSelectedConcept(c)}
-      />
+      {isSearchOpen && (
+        <SearchDialog
+          onClose={() => setIsSearchOpen(false)}
+          onSelectConcept={openConcept}
+        />
+      )}
     </div>
   );
 };
