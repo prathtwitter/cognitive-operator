@@ -1,5 +1,14 @@
 import type { DeepDive } from '../../types/curriculum';
+import { deepDive as affectHeuristicSomaticMarkers } from './concepts/affect-heuristic-somatic-markers';
+import { deepDive as bayesianUpdatingBaseRateNeglect } from './concepts/bayesian-updating-base-rate-neglect';
 import { deepDive as dualProcessMiserliness } from './concepts/dual-process-miserliness';
+import { deepDive as effortJustificationDissonance } from './concepts/effort-justification-dissonance';
+import { deepDive as epistemicArroganceOverprecision } from './concepts/epistemic-arrogance-overprecision';
+import { deepDive as fundamentalAttributionError } from './concepts/fundamental-attribution-error';
+import { deepDive as identityProtectiveCognition } from './concepts/identity-protective-cognition';
+import { deepDive as illusionOfExplanatoryDepth } from './concepts/illusion-of-explanatory-depth';
+import { deepDive as naiveRealismBiasBlindSpot } from './concepts/naive-realism-bias-blind-spot';
+import { deepDive as pressSecretaryConfabulation } from './concepts/press-secretary-confabulation';
 
 /**
  * Long-form deep dives for Sphere 1, keyed by concept id.
@@ -9,5 +18,14 @@ import { deepDive as dualProcessMiserliness } from './concepts/dual-process-mise
  * Add a file under `./concepts/` and re-run the script instead.
  */
 export const SPHERE_1_DEEP_DIVES: Record<string, DeepDive> = {
+  'affect-heuristic-somatic-markers': affectHeuristicSomaticMarkers,
+  'bayesian-updating-base-rate-neglect': bayesianUpdatingBaseRateNeglect,
   'dual-process-miserliness': dualProcessMiserliness,
+  'effort-justification-dissonance': effortJustificationDissonance,
+  'epistemic-arrogance-overprecision': epistemicArroganceOverprecision,
+  'fundamental-attribution-error': fundamentalAttributionError,
+  'identity-protective-cognition': identityProtectiveCognition,
+  'illusion-of-explanatory-depth': illusionOfExplanatoryDepth,
+  'naive-realism-bias-blind-spot': naiveRealismBiasBlindSpot,
+  'press-secretary-confabulation': pressSecretaryConfabulation,
 };
