@@ -1,10 +1,13 @@
 import type { DeepDive } from '../../types/curriculum';
 import { deepDive as choiceArchitectureDefaultMechanics } from './concepts/choice-architecture-default-mechanics';
+import { deepDive as cobraEffectPerverseFeedbackLoops } from './concepts/cobra-effect-perverse-feedback-loops';
 import { deepDive as decisionFatigueDepletionTraps } from './concepts/decision-fatigue-depletion-traps';
 import { deepDive as dopaminergicPredictionErrorVariableSchedules } from './concepts/dopaminergic-prediction-error-variable-schedules';
 import { deepDive as endowmentEffectDivestitureAversion } from './concepts/endowment-effect-divestiture-aversion';
+import { deepDive as extrinsicIncentiveCrowdingOut } from './concepts/extrinsic-incentive-crowding-out';
 import { deepDive as goodhartsCampbellsLaws } from './concepts/goodharts-campbells-laws';
 import { deepDive as hyperbolicDiscountingPresentBias } from './concepts/hyperbolic-discounting-present-bias';
+import { deepDive as mentalAccountingNonFungibility } from './concepts/mental-accounting-non-fungibility';
 import { deepDive as sunkCostFallacyEscalationOfCommitment } from './concepts/sunk-cost-fallacy-escalation-of-commitment';
 
 /**
@@ -16,10 +19,13 @@ import { deepDive as sunkCostFallacyEscalationOfCommitment } from './concepts/su
  */
 export const SPHERE_4_DEEP_DIVES: Record<string, DeepDive> = {
   'choice-architecture-default-mechanics': choiceArchitectureDefaultMechanics,
+  'cobra-effect-perverse-feedback-loops': cobraEffectPerverseFeedbackLoops,
   'decision-fatigue-depletion-traps': decisionFatigueDepletionTraps,
   'dopaminergic-prediction-error-variable-schedules': dopaminergicPredictionErrorVariableSchedules,
   'endowment-effect-divestiture-aversion': endowmentEffectDivestitureAversion,
+  'extrinsic-incentive-crowding-out': extrinsicIncentiveCrowdingOut,
   'goodharts-campbells-laws': goodhartsCampbellsLaws,
   'hyperbolic-discounting-present-bias': hyperbolicDiscountingPresentBias,
+  'mental-accounting-non-fungibility': mentalAccountingNonFungibility,
   'sunk-cost-fallacy-escalation-of-commitment': sunkCostFallacyEscalationOfCommitment,
 };
