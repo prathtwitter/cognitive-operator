@@ -46,21 +46,21 @@ export const ScenarioLabView: React.FC = () => {
   return (
     <div className="space-y-6 pb-12 max-w-3xl mx-auto">
       {/* Header Banner */}
-      <div className="rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-emerald-950/20 via-[#11131a] to-[#11131a] p-6 sm:p-8">
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-400">
-            <Compass className="h-4 w-4" />
+      <div className="rounded-3xl border border-[#c48b76]/20 bg-gradient-to-br from-[#12131a] via-[#0e0f14] to-[#08080a] p-6 sm:p-8 shadow-2xl">
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <div className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-[0.25em] text-[#c48b76]">
+            <Compass className="h-3.5 w-3.5" />
             Pattern Recognition Laboratory
           </div>
-          <div className="flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-950/40 px-3 py-1 text-xs font-bold text-emerald-300">
-            <Trophy className="h-3.5 w-3.5" />
+          <div className="flex items-center gap-1.5 rounded-full border border-[#c48b76]/30 bg-[#c48b76]/10 px-3 py-1 text-xs font-mono font-bold text-[#e5b8a6]">
+            <Trophy className="h-3.5 w-3.5 text-[#c48b76]" />
             Mastery: {scoreCount}/{totalScenarios}
           </div>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+        <h1 className="text-2xl sm:text-4xl font-serif font-normal text-white tracking-tight">
           Live Arena Simulations
         </h1>
-        <p className="mt-2 text-sm text-zinc-300 leading-relaxed">
+        <p className="mt-2 text-sm text-stone-300 font-normal leading-relaxed">
           Test your diagnostic speed. Read high-stakes executive and interpersonal scenarios, identify the active cognitive distortion, and deploy the optimal counter-maneuver.
         </p>
 
@@ -77,14 +77,14 @@ export const ScenarioLabView: React.FC = () => {
                   setSelectedOptionId(null);
                   setIsAnswerSubmitted(false);
                 }}
-                className={`h-2 flex-1 rounded-full cursor-pointer transition-all ${
+                className={`h-1.5 flex-1 rounded-full cursor-pointer transition-all ${
                   idx === currentScenarioIndex
-                    ? 'bg-emerald-400 ring-2 ring-emerald-500/40'
+                    ? 'bg-[#c48b76] ring-2 ring-[#c48b76]/40'
                     : hasPassed
-                    ? 'bg-emerald-600'
+                    ? 'bg-emerald-500/80'
                     : hasFailed
-                    ? 'bg-rose-600'
-                    : 'bg-zinc-800'
+                    ? 'bg-rose-500/80'
+                    : 'bg-white/10'
                 }`}
                 title={s.title}
               />
@@ -94,26 +94,26 @@ export const ScenarioLabView: React.FC = () => {
       </div>
 
       {/* Active Scenario Card */}
-      <div className="rounded-3xl border border-zinc-800/80 bg-[#11131a] p-6 sm:p-8 space-y-6">
-        <div className="flex items-center justify-between text-xs text-zinc-400 border-b border-zinc-800/60 pb-3">
-          <span className="font-semibold text-zinc-300">
+      <div className="rounded-3xl border border-white/10 bg-[#0e0f14] p-6 sm:p-8 space-y-6 shadow-xl">
+        <div className="flex items-center justify-between text-xs text-zinc-400 border-b border-white/10 pb-4">
+          <span className="font-mono text-zinc-300 uppercase tracking-widest text-[11px]">
             Scenario {currentScenarioIndex + 1} of {totalScenarios}
           </span>
-          <span className="rounded bg-zinc-800 px-2 py-0.5 text-[11px] font-medium text-emerald-400 border border-zinc-700/60">
+          <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-[11px] font-mono text-[#e5b8a6] border border-[#c48b76]/20">
             {scenario.context} Environment
           </span>
         </div>
 
         <div>
-          <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-serif font-normal text-white tracking-tight">
             {scenario.title}
           </h2>
-          <p className="mt-3 text-sm text-zinc-300 leading-relaxed">
+          <p className="mt-3 text-sm text-zinc-300 leading-relaxed font-light">
             {scenario.scenarioText}
           </p>
 
           {scenario.dialogueSnippet && (
-            <div className="mt-4 rounded-xl bg-[#090a0f] p-3.5 border-l-4 border-emerald-500 border-y border-r border-zinc-800 text-xs sm:text-sm text-zinc-200 italic font-mono">
+            <div className="mt-4 rounded-2xl bg-[#08080a] p-4 border-l-2 border-[#c48b76] border-y border-r border-white/5 text-xs sm:text-sm text-zinc-200 italic font-mono">
               {scenario.dialogueSnippet}
             </div>
           )}
@@ -121,10 +121,10 @@ export const ScenarioLabView: React.FC = () => {
 
         {/* Question Header */}
         <div className="pt-2">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+          <h3 className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#c48b76]">
             Diagnostic Test:
           </h3>
-          <p className="text-sm font-semibold text-white mt-1">
+          <p className="text-base font-serif text-white mt-1">
             {scenario.question}
           </p>
         </div>
@@ -133,19 +133,19 @@ export const ScenarioLabView: React.FC = () => {
         <div className="space-y-3">
           {scenario.options.map((option) => {
             const isSelected = selectedOptionId === option.id;
-            let optionStyles = 'border-zinc-800 bg-[#090a0f] hover:border-zinc-700 text-zinc-300';
+            let optionStyles = 'border-white/5 bg-[#08080a] hover:border-white/20 text-zinc-300';
 
             if (isSelected) {
-              optionStyles = 'border-emerald-500 bg-emerald-950/20 text-white ring-1 ring-emerald-500/50';
+              optionStyles = 'border-[#c48b76] bg-[#c48b76]/10 text-white ring-1 ring-[#c48b76]/50';
             }
 
             if (isAnswerSubmitted) {
               if (option.isCorrect) {
-                optionStyles = 'border-emerald-500 bg-emerald-950/40 text-emerald-200 ring-2 ring-emerald-500';
+                optionStyles = 'border-emerald-500/60 bg-emerald-950/30 text-emerald-200 ring-1 ring-emerald-500/40';
               } else if (isSelected && !option.isCorrect) {
-                optionStyles = 'border-rose-500 bg-rose-950/40 text-rose-200 ring-2 ring-rose-500';
+                optionStyles = 'border-rose-500/60 bg-rose-950/30 text-rose-200 ring-1 ring-rose-500/40';
               } else {
-                optionStyles = 'border-zinc-850 bg-zinc-900/30 text-zinc-600 opacity-60';
+                optionStyles = 'border-white/5 bg-black/40 text-zinc-600 opacity-50';
               }
             }
 
@@ -154,7 +154,7 @@ export const ScenarioLabView: React.FC = () => {
                 key={option.id}
                 onClick={() => handleSelectOption(option.id)}
                 disabled={isAnswerSubmitted}
-                className={`w-full text-left rounded-2xl border p-4 transition-all flex items-start gap-3 ${optionStyles}`}
+                className={`w-full text-left rounded-2xl border p-4 transition-all flex items-start gap-3 cursor-pointer ${optionStyles}`}
               >
                 <div className="mt-0.5">
                   {isAnswerSubmitted && option.isCorrect && (
@@ -164,11 +164,11 @@ export const ScenarioLabView: React.FC = () => {
                     <XCircle className="h-4 w-4 text-rose-400" />
                   )}
                   {!isAnswerSubmitted && (
-                    <div className={`h-4 w-4 rounded-full border ${isSelected ? 'border-emerald-400 bg-emerald-500' : 'border-zinc-600'}`} />
+                    <div className={`h-4 w-4 rounded-full border transition-colors ${isSelected ? 'border-[#c48b76] bg-[#c48b76]' : 'border-zinc-700'}`} />
                   )}
                 </div>
                 <div className="flex-1">
-                  <div className="text-sm font-bold text-white mb-0.5">
+                  <div className="text-sm font-medium text-white mb-0.5">
                     {option.conceptTitle}
                   </div>
                 </div>
@@ -182,10 +182,10 @@ export const ScenarioLabView: React.FC = () => {
           <button
             onClick={handleSubmitAnswer}
             disabled={!selectedOptionId}
-            className={`w-full rounded-xl py-3 text-xs sm:text-sm font-bold transition-all shadow-md ${
+            className={`w-full rounded-full py-3 text-xs font-mono font-bold tracking-widest uppercase transition-all shadow-lg ${
               selectedOptionId
-                ? 'bg-emerald-500 text-black hover:bg-emerald-400 shadow-emerald-950/40'
-                : 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                ? 'bg-white text-black hover:bg-[#f4f4f6] shadow-white/10 cursor-pointer'
+                : 'bg-white/5 text-zinc-600 cursor-not-allowed border border-white/5'
             }`}
           >
             Confirm Diagnostic
@@ -195,44 +195,44 @@ export const ScenarioLabView: React.FC = () => {
             {/* Feedback & Weaponry Reveal Box */}
             <div className={`rounded-2xl border p-5 ${
               chosenOption?.isCorrect 
-                ? 'border-emerald-500/40 bg-emerald-950/20' 
-                : 'border-rose-500/40 bg-rose-950/20'
+                ? 'border-emerald-500/30 bg-emerald-950/20' 
+                : 'border-rose-500/30 bg-rose-950/20'
             }`}>
               <div className="flex items-center gap-2 mb-2">
                 {chosenOption?.isCorrect ? (
                   <>
                     <CheckCircle2 className="h-5 w-5 text-emerald-400" />
-                    <span className="text-sm font-bold text-emerald-300">Diagnostic Calibrated (Correct)</span>
+                    <span className="text-sm font-serif font-bold text-emerald-300">Diagnostic Calibrated (Correct)</span>
                   </>
                 ) : (
                   <>
                     <XCircle className="h-5 w-5 text-rose-400" />
-                    <span className="text-sm font-bold text-rose-300">Diagnostic Error</span>
+                    <span className="text-sm font-serif font-bold text-rose-300">Diagnostic Error</span>
                   </>
                 )}
               </div>
 
-              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light">
                 {chosenOption?.explanation}
               </p>
 
               {/* Recommended Weapon */}
-              <div className="mt-4 pt-3 border-t border-zinc-800/80">
-                <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-400 mb-1.5">
+              <div className="mt-4 pt-3 border-t border-white/10">
+                <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#c48b76] mb-1.5">
                   <Zap className="h-3.5 w-3.5" />
                   Recommended Conversational Counter-Move:
                 </div>
-                <div className="rounded-xl bg-[#090a0f] p-3 font-mono text-xs sm:text-sm text-amber-200 border border-zinc-800">
-                  "{chosenOption?.weaponRecommendation}"
+                <div className="rounded-xl bg-[#08080a] p-3 font-serif text-sm sm:text-base text-[#f4f4f6] border border-[#c48b76]/20 italic">
+                  &ldquo;{chosenOption?.weaponRecommendation}&rdquo;
                 </div>
               </div>
             </div>
 
             {/* Next or Reset Button */}
-            <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center justify-between gap-3 pt-2">
               <button
                 onClick={handleReset}
-                className="flex items-center gap-1.5 text-xs font-semibold text-zinc-400 hover:text-zinc-200"
+                className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-zinc-500 hover:text-zinc-300 cursor-pointer"
               >
                 <RotateCcw className="h-3.5 w-3.5" />
                 <span>Restart Drills</span>
@@ -241,13 +241,13 @@ export const ScenarioLabView: React.FC = () => {
               {currentScenarioIndex < totalScenarios - 1 ? (
                 <button
                   onClick={handleNext}
-                  className="flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-xs sm:text-sm font-bold text-black hover:bg-emerald-400 transition-colors shadow-md"
+                  className="flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-[#f4f4f6] transition-all shadow-md cursor-pointer"
                 >
                   <span>Next Scenario</span>
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               ) : (
-                <div className="flex items-center gap-2 text-xs font-bold text-emerald-400">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#c48b76]">
                   <Sparkles className="h-4 w-4" />
                   All simulations evaluated!
                 </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Zap, Compass, Bookmark } from 'lucide-react';
+import { Home, Sparkles, ShieldAlert, Swords, Bookmark } from 'lucide-react';
 import { useUserProgress } from '../context/UserProgressContext';
 import type { TabId } from '../lib/router';
 
@@ -11,13 +11,13 @@ interface MobileBottomNavProps {
 const TABS: Array<{
   id: TabId;
   label: string;
-  activeColor: string;
   icon: React.ComponentType<{ className?: string }>;
 }> = [
-  { id: 'curriculum', label: 'Curriculum', activeColor: 'text-cyan-400', icon: BookOpen },
-  { id: 'weaponry', label: 'Weaponry', activeColor: 'text-amber-400', icon: Zap },
-  { id: 'scenarios', label: 'Scenario Lab', activeColor: 'text-emerald-400', icon: Compass },
-  { id: 'vault', label: 'Vault', activeColor: 'text-purple-400', icon: Bookmark },
+  { id: 'curriculum', label: 'Home', icon: Home },
+  { id: 'weaponry', label: 'Insights', icon: Sparkles },
+  { id: 'scenarios', label: 'Cases', icon: Swords },
+  { id: 'battlecards', label: 'Prep', icon: ShieldAlert },
+  { id: 'vault', label: 'Vault', icon: Bookmark },
 ];
 
 export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ activeTab, setActiveTab }) => {
@@ -25,11 +25,11 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ activeTab, set
 
   return (
     <nav
-      className="fixed bottom-0 left-0 z-40 w-full border-t border-zinc-800/80 bg-[#090a0f]/95 pb-safe backdrop-blur-lg md:hidden"
+      className="fixed bottom-0 left-0 z-40 w-full border-t border-white/[0.08] bg-[#08080a]/95 pb-safe backdrop-blur-xl md:hidden"
       aria-label="Primary"
     >
-      <div className="grid h-16 grid-cols-4 items-center px-2">
-        {TABS.map(({ id, label, activeColor, icon: Icon }) => {
+      <div className="grid h-16 grid-cols-5 items-center px-1">
+        {TABS.map(({ id, label, icon: Icon }) => {
           const isActive = activeTab === id;
           return (
             <button
@@ -37,15 +37,17 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ activeTab, set
               type="button"
               onClick={() => setActiveTab(id)}
               aria-current={isActive ? 'page' : undefined}
-              className={`relative flex flex-col items-center justify-center gap-1 py-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded-lg ${
-                isActive ? activeColor : 'text-zinc-400 hover:text-zinc-200'
+              className={`relative flex flex-col items-center justify-center gap-1 py-1 transition-colors focus-visible:outline-none rounded-lg ${
+                isActive ? 'text-white' : 'text-stone-500 hover:text-stone-300'
               }`}
             >
-              <Icon className="h-5 w-5" />
-              <span className="text-[11px] font-medium tracking-tight">{label}</span>
+              <Icon className={`h-4 w-4 ${isActive ? 'text-[#c48b76]' : ''}`} />
+              <span className={`text-[10px] tracking-wide ${isActive ? 'font-medium text-white' : 'font-normal'}`}>
+                {label}
+              </span>
               {id === 'vault' && stats.bookmarked > 0 && (
                 <span
-                  className="absolute top-1 right-5 flex h-4 w-4 items-center justify-center rounded-full bg-purple-500 text-[9px] font-bold text-white"
+                  className="absolute top-1.5 right-3 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[#c48b76] text-[8px] font-bold text-black"
                   aria-label={`${stats.bookmarked} bookmarked`}
                 >
                   {stats.bookmarked}

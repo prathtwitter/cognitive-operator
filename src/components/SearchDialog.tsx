@@ -48,21 +48,21 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ onClose, onSelectCon
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-150"
       onClick={onClose}
     >
       <div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
-        aria-label="Search concepts and tactics"
+        aria-label="Search models and tactics"
         tabIndex={-1}
-        className="w-full max-w-xl rounded-2xl border border-zinc-800 bg-[#0c0e15] shadow-2xl overflow-hidden focus:outline-none"
+        className="w-full max-w-xl rounded-2xl border border-white/10 bg-[#0c0d12] shadow-2xl overflow-hidden focus:outline-none text-stone-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center gap-3 border-b border-zinc-800 px-4 py-3 bg-zinc-900/60">
-          <Search className="h-5 w-5 text-zinc-400" aria-hidden="true" />
+        <div className="flex items-center gap-3 border-b border-white/[0.08] px-4 py-3.5 bg-white/[0.02]">
+          <Search className="h-4 w-4 text-stone-400" aria-hidden="true" />
           <input
             ref={inputRef}
             type="text"
@@ -74,15 +74,15 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ onClose, onSelectCon
                 select(results[0]);
               }
             }}
-            placeholder="Search concepts, thinkers (Kahneman, Schelling), or tactics..."
-            aria-label="Search concepts, thinkers, or tactics"
-            className="flex-1 bg-transparent text-sm text-white placeholder-zinc-500 focus:outline-none"
+            placeholder="Search models, thinkers (Kahneman, Schelling), or tactics..."
+            aria-label="Search models, thinkers, or tactics"
+            className="flex-1 bg-transparent text-sm text-white placeholder-stone-500 focus:outline-none font-sans"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery('')}
-              className="rounded p-1 text-zinc-400 hover:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+              className="rounded p-1 text-stone-400 hover:text-white focus-visible:outline-none cursor-pointer"
               aria-label="Clear search"
             >
               <X className="h-4 w-4" />
@@ -91,7 +91,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ onClose, onSelectCon
           <button
             type="button"
             onClick={onClose}
-            className="rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] font-mono text-zinc-400 hover:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+            className="rounded-full border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-mono text-stone-400 hover:text-white focus-visible:outline-none cursor-pointer"
             aria-label="Close search"
           >
             ESC
@@ -99,16 +99,16 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ onClose, onSelectCon
         </div>
 
         {/* Search Results List */}
-        <div className="max-h-96 overflow-y-auto p-2 divide-y divide-zinc-800/40">
+        <div className="max-h-96 overflow-y-auto p-2 divide-y divide-white/[0.04]">
           {query && results.length === 0 && (
-            <div className="p-8 text-center text-xs text-zinc-500">
-              No matching concepts or tactics found for “{query}”. Try searching by thinker or situation.
+            <div className="p-8 text-center text-xs text-stone-500 font-sans">
+              No matching models or tactics found for “{query}”.
             </div>
           )}
 
           {!query && (
-            <div className="p-6 text-center text-xs text-zinc-500">
-              Type to search across all 40 concepts, scientific mechanisms, and tactical conversational lines.
+            <div className="p-6 text-center text-xs text-stone-500 font-sans">
+              Type to search across all 40 models, scientific mechanisms, and tactical scripts.
             </div>
           )}
 
@@ -117,31 +117,31 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ onClose, onSelectCon
               key={concept.id}
               type="button"
               onClick={() => select(concept)}
-              className="w-full text-left flex items-center justify-between p-3 rounded-xl hover:bg-zinc-900/80 cursor-pointer transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+              className="w-full text-left flex items-center justify-between p-3 rounded-xl hover:bg-white/[0.04] cursor-pointer transition-colors group focus-visible:outline-none"
             >
               <div className="flex-1 pr-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[10px] font-mono font-bold text-zinc-400">
+                  <span className="text-[10px] font-mono text-stone-400">
                     #{String(concept.globalIndex).padStart(2, '0')}
                   </span>
-                  <span className="text-xs font-bold text-white group-hover:text-cyan-400 transition-colors">
+                  <span className="font-serif text-sm font-normal text-white group-hover:text-[#f4f4f6] transition-colors">
                     {concept.title}
                   </span>
                 </div>
-                <p className="text-[11px] text-zinc-400 line-clamp-1">
+                <p className="text-[11px] text-stone-400 line-clamp-1 font-sans">
                   {concept.tagline}
                 </p>
-                <div className="flex items-center gap-2 mt-1 text-[10px] text-zinc-500">
+                <div className="flex items-center gap-2 mt-1 text-[10px] text-stone-500 font-sans">
                   <span>{concept.formalTerminology.keyThinkers.slice(0, 2).join(', ')}</span>
                   {concept.conversationalWeaponry[0] && (
-                    <span className="flex items-center gap-0.5 text-amber-400/90">
+                    <span className="flex items-center gap-0.5 text-[#c48b76]">
                       <Zap className="h-2.5 w-2.5" />
                       Weapon included
                     </span>
                   )}
                 </div>
               </div>
-              <ChevronRight className="h-4 w-4 text-zinc-600 group-hover:text-zinc-300 transition-transform group-hover:translate-x-0.5" />
+              <ChevronRight className="h-4 w-4 text-stone-600 group-hover:text-[#c48b76] transition-transform group-hover:translate-x-1" />
             </button>
           ))}
         </div>

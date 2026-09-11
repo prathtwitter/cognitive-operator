@@ -24,7 +24,7 @@ export const VaultView: React.FC<VaultViewProps> = ({ onSelectConcept, onExplore
   const handleClearProgress = () => {
     if (
       window.confirm(
-        'Reset all Cognitive Operator bookmarks, mastery flags and drill scores? This cannot be undone.'
+        'Reset all PSYCHÉ bookmarks, mastery flags, and drill scores? This cannot be undone.'
       )
     ) {
       resetProgress();
@@ -32,70 +32,74 @@ export const VaultView: React.FC<VaultViewProps> = ({ onSelectConcept, onExplore
   };
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-10 pb-12 text-stone-200">
       {/* Header Banner */}
-      <div className="rounded-3xl border border-purple-500/20 bg-gradient-to-br from-purple-950/20 via-[#11131a] to-[#11131a] p-6 sm:p-8">
-        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-purple-400 mb-2">
-          <Bookmark className="h-4 w-4" />
-          Personal Mastery Vault
+      <div className="rounded-3xl border border-white/10 bg-[#0e0f14] p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+        <div className="pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full bg-[#c48b76]/10 blur-3xl" />
+        
+        <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#c48b76] mb-3">
+          <Bookmark className="h-3.5 w-3.5" />
+          <span>Executive Dossier &amp; Vault</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-          Executive Mastery & Bookmarks
+        <h1 className="font-serif text-3xl sm:text-4xl font-light text-white tracking-tight">
+          Executive Mastery &amp; Bookmarks
         </h1>
-        <p className="mt-2 text-sm text-zinc-300 leading-relaxed max-w-2xl">
-          Quickly review high-priority bookmarked models before walking into meetings, and track your progress toward mastering all 40 cognitive and game-theoretic phenomena.
+        <p className="mt-3 text-sm sm:text-base text-stone-400 leading-relaxed max-w-2xl font-sans">
+          Curated briefing cards for high-stakes meetings, negotiations, and strategic reviews. Track progress toward mastering all 40 cognitive architectures and choice mechanisms.
         </p>
 
         {/* Stats Grid */}
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div className="rounded-2xl border border-zinc-800 bg-[#090a0f] p-4">
-            <span className="text-[11px] font-semibold text-zinc-400">Total Curriculum</span>
-            <div className="text-xl font-bold text-white mt-0.5">{stats.total} Concepts</div>
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+          <div className="rounded-2xl border border-white/[0.08] bg-[#08080a] p-4 sm:p-5">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-stone-400">Total Curriculum</span>
+            <div className="font-serif text-2xl font-light text-white mt-1">{stats.total} Models</div>
           </div>
 
-          <div className="rounded-2xl border border-cyan-500/30 bg-cyan-950/20 p-4">
-            <span className="text-[11px] font-semibold text-cyan-400">Mastered</span>
-            <div className="text-xl font-bold text-white mt-0.5">{stats.completed} <span className="text-xs font-normal text-zinc-400">({stats.progressPercentage}%)</span></div>
+          <div className="rounded-2xl border border-white/[0.08] bg-[#08080a] p-4 sm:p-5">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-stone-400">Mastered</span>
+            <div className="font-serif text-2xl font-light text-white mt-1">
+              {stats.completed} <span className="font-sans text-xs text-stone-400">({stats.progressPercentage}%)</span>
+            </div>
           </div>
 
-          <div className="rounded-2xl border border-purple-500/30 bg-purple-950/20 p-4">
-            <span className="text-[11px] font-semibold text-purple-400">Saved in Vault</span>
-            <div className="text-xl font-bold text-white mt-0.5">{stats.bookmarked} Concepts</div>
+          <div className="rounded-2xl border border-white/[0.08] bg-[#08080a] p-4 sm:p-5">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-stone-400">Saved in Vault</span>
+            <div className="font-serif text-2xl font-light text-[#c48b76] mt-1">{stats.bookmarked} Models</div>
           </div>
 
-          <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-4">
-            <span className="text-[11px] font-semibold text-emerald-400">Readiness</span>
-            <div className="text-xl font-bold text-white mt-0.5">
-              {stats.progressPercentage >= 80 ? 'Elite' : stats.progressPercentage >= 40 ? 'Operator' : 'Novice'}
+          <div className="rounded-2xl border border-white/[0.08] bg-[#08080a] p-4 sm:p-5">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-stone-400">Tier Readiness</span>
+            <div className="font-serif text-2xl font-light text-white mt-1">
+              {stats.progressPercentage >= 80 ? 'Master' : stats.progressPercentage >= 40 ? 'Operator' : 'Initiate'}
             </div>
           </div>
         </div>
       </div>
 
       {/* Bookmarked Concepts Section */}
-      <section className="space-y-4">
+      <section className="space-y-5">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <Bookmark className="h-4 w-4 text-purple-400 fill-purple-400" />
+          <h2 className="font-serif text-2xl font-light text-white flex items-center gap-2.5">
+            <Bookmark className="h-4 w-4 text-[#c48b76] fill-[#c48b76]" />
             <span>Saved Bookmarks ({bookmarkedConcepts.length})</span>
           </h2>
         </div>
 
         {bookmarkedConcepts.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-zinc-800 p-8 text-center bg-zinc-900/20">
-            <p className="text-sm text-zinc-400">
-              You haven’t bookmarked any concepts yet. Tap the bookmark icon on any concept card to pin it here for quick pre-meeting review.
+          <div className="rounded-2xl border border-dashed border-white/10 p-10 text-center bg-white/[0.01]">
+            <p className="text-sm text-stone-400 font-sans">
+              No models bookmarked yet. Select the bookmark icon on any card across the curriculum to pin high-priority models here.
             </p>
             <button
               onClick={onExploreCurriculum}
-              className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-zinc-800 px-4 py-2 text-xs font-semibold text-white hover:bg-zinc-700 transition-colors"
+              className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 text-xs font-semibold text-black hover:bg-stone-200 transition-colors cursor-pointer"
             >
               <span>Explore Curriculum</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {bookmarkedConcepts.map((concept) => (
               <ConceptCard
                 key={concept.id}
@@ -108,22 +112,22 @@ export const VaultView: React.FC<VaultViewProps> = ({ onSelectConcept, onExplore
       </section>
 
       {/* Mastered Concepts Section */}
-      <section className="space-y-4 pt-4 border-t border-zinc-800/80">
+      <section className="space-y-5 pt-8 border-t border-white/[0.08]">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <ShieldCheck className="h-4 w-4 text-cyan-400" />
-            <span>Mastered Concepts ({completedConcepts.length})</span>
+          <h2 className="font-serif text-2xl font-light text-white flex items-center gap-2.5">
+            <ShieldCheck className="h-4 w-4 text-emerald-400" />
+            <span>Mastered Models ({completedConcepts.length})</span>
           </h2>
         </div>
 
         {completedConcepts.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-zinc-800 p-8 text-center bg-zinc-900/20">
-            <p className="text-sm text-zinc-400">
-              No concepts marked as mastered yet. Mark concepts as mastered as you study each module.
+          <div className="rounded-2xl border border-dashed border-white/10 p-10 text-center bg-white/[0.01]">
+            <p className="text-sm text-stone-400 font-sans">
+              No models marked as mastered yet. Mark models as mastered as you review and drill them.
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {completedConcepts.map((concept) => (
               <ConceptCard
                 key={concept.id}
@@ -136,12 +140,12 @@ export const VaultView: React.FC<VaultViewProps> = ({ onSelectConcept, onExplore
       </section>
 
       {/* Reset Vault Settings */}
-      <div className="pt-6 border-t border-zinc-800/80 flex items-center justify-between text-xs text-zinc-500">
-        <span>Stored offline in this browser only — nothing leaves the device.</span>
+      <div className="pt-8 border-t border-white/[0.08] flex items-center justify-between text-xs text-stone-500 font-sans">
+        <span>Stored securely in local browser storage.</span>
         <button
           type="button"
           onClick={handleClearProgress}
-          className="flex items-center gap-1 text-rose-400/80 hover:text-rose-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 rounded"
+          className="flex items-center gap-1.5 text-stone-500 hover:text-rose-400 transition-colors cursor-pointer"
         >
           <Trash2 className="h-3.5 w-3.5" />
           <span>Reset Vault Data</span>

@@ -59,9 +59,10 @@ export const DeepDiveReader: React.FC<DeepDiveReaderProps> = ({ concept, onClose
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
         onCloseRef.current();
       }
     };
@@ -91,40 +92,40 @@ export const DeepDiveReader: React.FC<DeepDiveReaderProps> = ({ concept, onClose
 
   return (
     <div
-      className="fixed inset-0 z-[60] bg-[#0b0d13]"
+      className="fixed inset-0 z-[60] bg-[#08080a] text-stone-200"
       role="dialog"
       aria-modal="true"
       aria-label={`Deep dive: ${concept.title}`}
     >
       {/* Reading progress */}
-      <div className="absolute top-0 left-0 right-0 z-20 h-0.5 bg-zinc-900">
+      <div className="absolute top-0 left-0 right-0 z-20 h-0.5 bg-white/5">
         <div
-          className="h-full bg-gradient-to-r from-cyan-500 via-sky-400 to-emerald-400 transition-[width] duration-150"
+          className="h-full bg-[#c48b76] transition-[width] duration-150"
           style={{ width: `${progress}%` }}
         />
       </div>
 
       {/* Header */}
-      <header className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between gap-3 border-b border-zinc-800/70 bg-[#0b0d13]/95 px-4 sm:px-6 py-3 pt-safe backdrop-blur-md">
+      <header className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between gap-3 border-b border-white/[0.08] bg-[#08080a]/95 px-4 sm:px-6 py-3.5 pt-safe backdrop-blur-md">
         <button
           type="button"
           onClick={onClose}
-          className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs font-semibold text-zinc-300 hover:text-white hover:bg-zinc-800/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+          className="flex items-center gap-2 rounded-full border border-white/10 px-3.5 py-1.5 text-xs font-medium text-stone-300 hover:text-white hover:border-white/30 transition-colors focus-visible:outline-none cursor-pointer"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-3.5 w-3.5" />
           <span className="hidden sm:inline">Back to brief</span>
           <span className="sm:hidden">Back</span>
         </button>
 
-        <div className="flex min-w-0 items-center gap-2 text-[11px] text-zinc-500">
-          <span className="font-mono">#{String(concept.globalIndex).padStart(2, '0')}</span>
+        <div className="flex min-w-0 items-center gap-2 text-[11px] text-stone-400">
+          <span className="font-mono text-[#c48b76]">#{String(concept.globalIndex).padStart(2, '0')}</span>
           <span className="hidden truncate sm:inline">{sphere?.shortTitle}</span>
           {deepDive && (
             <>
               <span aria-hidden="true">•</span>
               <span className="flex items-center gap-1">
                 <Clock className="h-3 w-3" />
-                {deepDive.readingTimeMinutes} min
+                {deepDive.readingTimeMinutes} min read
               </span>
             </>
           )}
@@ -133,7 +134,7 @@ export const DeepDiveReader: React.FC<DeepDiveReaderProps> = ({ concept, onClose
         <button
           type="button"
           onClick={handleShare}
-          className="rounded-lg p-2 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+          className="rounded-full p-2 text-stone-400 hover:text-white hover:bg-white/[0.06] transition-colors focus-visible:outline-none cursor-pointer"
           aria-label="Share this deep dive"
           title={shareState === 'failed' ? 'Could not copy link' : 'Share this deep dive'}
         >
@@ -155,38 +156,38 @@ export const DeepDiveReader: React.FC<DeepDiveReaderProps> = ({ concept, onClose
       >
         <article className="mx-auto w-full max-w-[46rem] px-5 sm:px-8">
           {/* Title block */}
-          <header className="pt-8 pb-6">
-            <div className={`inline-flex items-center gap-2 rounded-md border px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider ${sphere?.badgeColor}`}>
+          <header className="pt-10 pb-8 border-b border-white/[0.08]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-3 py-0.5 text-[11px] font-medium tracking-wide text-stone-300">
               Sphere {sphere?.number}: {sphere?.shortTitle}
             </div>
-            <h1 className="mt-4 text-[1.75rem] sm:text-[2.4rem] font-extrabold leading-[1.15] tracking-tight text-white">
+            <h1 className="mt-5 font-serif text-3xl sm:text-5xl font-normal leading-[1.15] tracking-tight text-white">
               {concept.title}
             </h1>
-            <p className="mt-3 text-base sm:text-lg leading-relaxed text-cyan-300/85">
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-stone-200 font-sans">
               {concept.tagline}
             </p>
           </header>
 
           {state.status === 'loading' && (
-            <div className="flex items-center gap-3 rounded-2xl border border-zinc-800 bg-[#11131a] p-6 text-sm text-zinc-400">
-              <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
+            <div className="mt-8 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-sm text-stone-400">
+              <Loader2 className="h-4 w-4 animate-spin text-[#c48b76]" />
               Loading the deep dive…
             </div>
           )}
 
           {state.status === 'missing' && (
-            <div className="rounded-2xl border border-dashed border-zinc-800 bg-[#11131a] p-8 text-center">
-              <BookOpen className="mx-auto h-6 w-6 text-zinc-600" />
-              <p className="mt-3 text-sm font-semibold text-zinc-300">
-                The deep dive for this concept is still being written.
+            <div className="mt-8 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-8 text-center">
+              <BookOpen className="mx-auto h-6 w-6 text-stone-500" />
+              <p className="mt-3 text-sm font-serif text-stone-200">
+                The deep dive for this model is currently in editorial review.
               </p>
-              <p className="mt-1.5 text-xs text-zinc-500">
-                The full brief, weapons and curated source are all available on the concept page.
+              <p className="mt-1.5 text-xs text-stone-400">
+                The full analysis, conversational weapons, and curated source are available on the model brief.
               </p>
               <button
                 type="button"
                 onClick={onClose}
-                className="mt-5 rounded-xl bg-zinc-800 px-4 py-2 text-xs font-semibold text-white hover:bg-zinc-700 transition-colors"
+                className="mt-5 rounded-full bg-white px-5 py-2 text-xs font-semibold text-black hover:bg-stone-200 transition-colors cursor-pointer"
               >
                 Back to the brief
               </button>
@@ -194,26 +195,25 @@ export const DeepDiveReader: React.FC<DeepDiveReaderProps> = ({ concept, onClose
           )}
 
           {state.status === 'error' && (
-            <div className="rounded-2xl border border-rose-500/30 bg-rose-950/20 p-6 text-sm text-rose-200">
-              This deep dive could not be loaded. If you are offline, it may not have been
-              cached yet — reconnect once and it will be available from then on.
+            <div className="mt-8 rounded-2xl border border-rose-900/40 bg-rose-950/20 p-6 text-sm text-rose-200">
+              This deep dive could not be loaded. If you are offline, reconnect once and it will be cached for offline reading.
             </div>
           )}
 
           {deepDive && (
             <>
               {/* Cold open */}
-              <div className="rounded-2xl border-l-2 border-cyan-500/60 bg-gradient-to-r from-cyan-950/25 to-transparent py-4 pl-5 pr-4 sm:pl-6">
-                <p className="text-[1.02rem] sm:text-[1.09rem] leading-[1.75] text-zinc-200">
+              <div className="mt-8 rounded-2xl border-l-2 border-[#c48b76] bg-white/[0.02] py-5 pl-6 pr-5">
+                <p className="font-serif text-lg sm:text-xl font-normal italic leading-relaxed text-stone-100">
                   {deepDive.hook}
                 </p>
               </div>
 
               {/* Narrative */}
               {deepDive.sections.map((section, i) => (
-                <section key={i} className="mt-11">
-                  <h2 className="mb-4 text-xl sm:text-2xl font-bold tracking-tight text-white">
-                    <span className="mr-2.5 font-mono text-sm text-cyan-500/70">
+                <section key={i} className="mt-12">
+                  <h2 className="mb-4 font-serif text-2xl sm:text-3xl font-normal tracking-tight text-white">
+                    <span className="mr-3 font-mono text-xs text-[#c48b76]">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     {section.heading}
@@ -223,7 +223,7 @@ export const DeepDiveReader: React.FC<DeepDiveReaderProps> = ({ concept, onClose
                     {section.body.map((paragraph, j) => (
                       <p
                         key={j}
-                        className="text-[1.02rem] sm:text-[1.07rem] leading-[1.78] text-zinc-300/95"
+                        className="text-[1.02rem] sm:text-[1.07rem] leading-[1.8] text-stone-300 font-sans"
                       >
                         {paragraph}
                       </p>
@@ -231,11 +231,11 @@ export const DeepDiveReader: React.FC<DeepDiveReaderProps> = ({ concept, onClose
                   </div>
 
                   {section.example && (
-                    <aside className="mt-6 rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-950/15 to-[#11131a] p-5">
-                      <div className="mb-2 text-[11px] font-bold uppercase tracking-wider text-amber-400">
+                    <aside className="mt-6 rounded-2xl border border-white/[0.08] bg-[#111218] p-5">
+                      <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#c48b76]">
                         {section.example.label}
                       </div>
-                      <p className="text-[0.97rem] leading-[1.72] text-zinc-300">
+                      <p className="text-[0.98rem] leading-[1.72] text-stone-300 font-serif italic">
                         {section.example.body}
                       </p>
                     </aside>
@@ -244,49 +244,49 @@ export const DeepDiveReader: React.FC<DeepDiveReaderProps> = ({ concept, onClose
               ))}
 
               {/* Spot it */}
-              <section className="mt-14">
-                <h2 className="flex items-center gap-2.5 text-xl sm:text-2xl font-bold tracking-tight text-white">
-                  <Eye className="h-5 w-5 text-cyan-400" />
-                  How to spot it
+              <section className="mt-16 pt-8 border-t border-white/[0.08]">
+                <h2 className="flex items-center gap-2.5 font-serif text-2xl sm:text-3xl font-normal tracking-tight text-white">
+                  <Eye className="h-5 w-5 text-[#c48b76]" />
+                  <span>How to Spot the Dynamics</span>
                 </h2>
-                <p className="mt-2 text-sm text-zinc-500">
-                  Observable signals, not inferences. If you notice one of these, the pattern is probably live.
+                <p className="mt-2 text-xs sm:text-sm text-stone-300">
+                  Observable behavioral signals in the wild. If you observe these markers, the mechanism is active.
                 </p>
-                <ul className="mt-5 space-y-3">
+                <ul className="mt-6 space-y-3">
                   {deepDive.spotIt.map((item, i) => (
-                    <li key={i} className="rounded-xl border border-zinc-800/80 bg-[#11131a] p-4">
-                      <p className="text-[0.97rem] font-semibold leading-snug text-white">
+                    <li key={i} className="rounded-xl border border-white/[0.08] bg-[#111218] p-4">
+                      <p className="text-[0.98rem] font-serif font-medium text-white">
                         {item.signal}
                       </p>
-                      <p className="mt-1.5 text-sm leading-relaxed text-zinc-400">{item.meaning}</p>
+                      <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-stone-300 font-sans">{item.meaning}</p>
                     </li>
                   ))}
                 </ul>
               </section>
 
               {/* Playbook */}
-              <section className="mt-14">
-                <h2 className="flex items-center gap-2.5 text-xl sm:text-2xl font-bold tracking-tight text-white">
-                  <Swords className="h-5 w-5 text-amber-400" />
-                  How to work with it
+              <section className="mt-16 pt-8 border-t border-white/[0.08]">
+                <h2 className="flex items-center gap-2.5 font-serif text-2xl sm:text-3xl font-normal tracking-tight text-white">
+                  <Swords className="h-5 w-5 text-[#c48b76]" />
+                  <span>Strategic Playbook</span>
                 </h2>
-                <ol className="mt-5 space-y-4">
+                <ol className="mt-6 space-y-4">
                   {deepDive.playbook.map((step, i) => (
                     <li
                       key={i}
-                      className="rounded-2xl border border-zinc-800/80 bg-[#11131a] p-5"
+                      className="rounded-2xl border border-white/[0.08] bg-[#111218] p-5"
                     >
-                      <div className="flex items-start gap-3">
-                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-amber-950/60 text-xs font-bold text-amber-300 border border-amber-800/40">
+                      <div className="flex items-start gap-3.5">
+                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/[0.05] border border-white/10 text-xs font-mono text-[#c48b76]">
                           {i + 1}
                         </span>
                         <div className="min-w-0">
-                          <p className="text-[0.99rem] font-semibold leading-snug text-white">
+                          <p className="text-base font-serif font-medium text-white">
                             {step.move}
                           </p>
-                          <p className="mt-2 text-sm leading-[1.7] text-zinc-300">{step.how}</p>
+                          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-stone-200 font-sans">{step.how}</p>
                           {step.watchOut && (
-                            <p className="mt-2.5 border-l-2 border-rose-500/40 pl-3 text-sm leading-relaxed text-rose-200/80">
+                            <p className="mt-3 border-l-2 border-rose-800/60 pl-3 text-xs sm:text-sm leading-relaxed text-rose-200/90 font-sans">
                               <strong className="font-semibold text-rose-300">Watch out: </strong>
                               {step.watchOut}
                             </p>
@@ -299,37 +299,37 @@ export const DeepDiveReader: React.FC<DeepDiveReaderProps> = ({ concept, onClose
               </section>
 
               {/* Misreads */}
-              <section className="mt-14">
-                <h2 className="flex items-center gap-2.5 text-xl sm:text-2xl font-bold tracking-tight text-white">
+              <section className="mt-16 pt-8 border-t border-white/[0.08]">
+                <h2 className="flex items-center gap-2.5 font-serif text-2xl sm:text-3xl font-normal tracking-tight text-white">
                   <AlertTriangle className="h-5 w-5 text-rose-400" />
-                  Where people get this wrong
+                  <span>Common Misconceptions</span>
                 </h2>
-                <div className="mt-5 space-y-3">
+                <div className="mt-6 space-y-3">
                   {deepDive.commonMisreads.map((item, i) => (
-                    <div key={i} className="rounded-xl border border-zinc-800/80 bg-[#11131a] p-4">
-                      <p className="text-sm font-semibold text-rose-300/90 line-through decoration-rose-500/40">
+                    <div key={i} className="rounded-xl border border-white/[0.08] bg-[#111218] p-4">
+                      <p className="text-xs sm:text-sm font-medium text-rose-300 line-through decoration-rose-500/50">
                         {item.misread}
                       </p>
-                      <p className="mt-2 text-sm leading-[1.7] text-zinc-300">{item.correction}</p>
+                      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-stone-300 font-sans">{item.correction}</p>
                     </div>
                   ))}
                 </div>
               </section>
 
               {/* Evidence */}
-              <section className="mt-14">
-                <h2 className="flex items-center gap-2.5 text-xl sm:text-2xl font-bold tracking-tight text-white">
-                  <BookOpen className="h-5 w-5 text-sky-400" />
-                  What the research actually says
+              <section className="mt-16 pt-8 border-t border-white/[0.08]">
+                <h2 className="flex items-center gap-2.5 font-serif text-2xl sm:text-3xl font-light tracking-tight text-white">
+                  <BookOpen className="h-5 w-5 text-[#c48b76]" />
+                  <span>Empirical Evidence</span>
                 </h2>
-                <div className="mt-5 space-y-3">
+                <div className="mt-6 space-y-3">
                   {deepDive.evidence.map((item, i) => (
-                    <div key={i} className="rounded-xl border border-zinc-800/80 bg-[#11131a] p-4">
-                      <p className="text-[13px] font-semibold text-sky-300">{item.source}</p>
-                      <p className="mt-1.5 text-sm leading-[1.7] text-zinc-300">{item.finding}</p>
+                    <div key={i} className="rounded-xl border border-white/[0.08] bg-[#111218] p-4">
+                      <p className="text-xs font-mono font-medium text-[#c48b76]">{item.source}</p>
+                      <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-stone-300 font-sans">{item.finding}</p>
                       {item.caveat && (
-                        <p className="mt-2.5 rounded-lg border border-amber-700/40 bg-amber-950/25 px-3 py-2 text-[13px] leading-relaxed text-amber-200/90">
-                          <strong className="font-semibold text-amber-300">Caveat: </strong>
+                        <p className="mt-2.5 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-xs leading-relaxed text-stone-400">
+                          <strong className="text-stone-300 font-medium">Caveat: </strong>
                           {item.caveat}
                         </p>
                       )}
@@ -345,46 +345,46 @@ export const DeepDiveReader: React.FC<DeepDiveReaderProps> = ({ concept, onClose
                   }
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 flex items-center justify-between gap-3 rounded-2xl border border-cyan-500/25 bg-cyan-950/15 p-4 transition-colors hover:bg-cyan-950/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                  className="mt-6 flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition-colors hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-none"
                 >
                   <div className="min-w-0">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-cyan-400">
-                      Go to the primary source
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c48b76]">
+                      Primary Scientific Resource
                     </div>
-                    <div className="mt-1 truncate text-sm font-semibold text-white">
+                    <div className="mt-1 truncate font-serif text-base text-white">
                       {concept.highSignalSource.title}
                     </div>
-                    <div className="mt-0.5 text-xs text-zinc-400">
+                    <div className="mt-0.5 text-xs text-stone-400">
                       {concept.highSignalSource.creatorOrHost} · {concept.highSignalSource.platform} · {concept.highSignalSource.duration}
                     </div>
                   </div>
-                  <ExternalLink className="h-4 w-4 shrink-0 text-cyan-400" />
+                  <ExternalLink className="h-4 w-4 shrink-0 text-[#c48b76]" />
                 </a>
               </section>
 
               {/* Takeaways */}
-              <section className="mt-14 mb-8 rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-emerald-950/20 to-[#11131a] p-6 sm:p-7">
-                <h2 className="flex items-center gap-2.5 text-lg font-bold tracking-tight text-white">
-                  <Lightbulb className="h-5 w-5 text-emerald-400" />
-                  If you remember nothing else
+              <section className="mt-16 mb-10 rounded-3xl border border-white/10 bg-[#111218] p-6 sm:p-8">
+                <h2 className="flex items-center gap-2.5 font-serif text-xl sm:text-2xl font-light tracking-tight text-white">
+                  <Lightbulb className="h-5 w-5 text-[#c48b76]" />
+                  <span>Executive Takeaway</span>
                 </h2>
-                <ul className="mt-4 space-y-3">
+                <ul className="mt-5 space-y-3.5">
                   {deepDive.takeaways.map((takeaway, i) => (
-                    <li key={i} className="flex gap-3 text-[0.97rem] leading-[1.7] text-zinc-200">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
-                      {takeaway}
+                    <li key={i} className="flex gap-3 text-xs sm:text-sm leading-relaxed text-stone-300 font-sans">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c48b76]" />
+                      <span>{takeaway}</span>
                     </li>
                   ))}
                 </ul>
               </section>
 
-              <div className="pb-10 text-center">
+              <div className="pb-12 text-center">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="rounded-xl border border-zinc-700 bg-zinc-900 px-5 py-2.5 text-xs font-semibold text-zinc-200 hover:bg-zinc-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                  className="rounded-full border border-white/20 bg-transparent px-6 py-2.5 text-xs font-medium text-white hover:border-white hover:bg-white/5 transition-colors cursor-pointer"
                 >
-                  ← Back to the concept brief
+                  ← Return to Model Brief
                 </button>
               </div>
             </>

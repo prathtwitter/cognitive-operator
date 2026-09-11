@@ -1,7 +1,7 @@
 import { useMemo, useSyncExternalStore } from 'react';
 import type { SphereId } from '../types/curriculum';
 
-export type TabId = 'curriculum' | 'weaponry' | 'scenarios' | 'vault';
+export type TabId = 'curriculum' | 'weaponry' | 'battlecards' | 'scenarios' | 'vault';
 export type DifficultyFilter = 'All' | 'Foundational' | 'Advanced' | 'Lethal';
 export type ContextTagFilter =
   | 'All'
@@ -38,6 +38,9 @@ const TAB_BY_SLUG: Record<string, TabId> = {
   curriculum: 'curriculum',
   arena: 'weaponry',
   weaponry: 'weaponry',
+  prep: 'battlecards',
+  battlecards: 'battlecards',
+  preflight: 'battlecards',
   lab: 'scenarios',
   scenarios: 'scenarios',
   vault: 'vault',
@@ -46,6 +49,7 @@ const TAB_BY_SLUG: Record<string, TabId> = {
 const SLUG_BY_TAB: Record<TabId, string> = {
   curriculum: '',
   weaponry: 'arena',
+  battlecards: 'prep',
   scenarios: 'lab',
   vault: 'vault',
 };
@@ -53,7 +57,8 @@ const SLUG_BY_TAB: Record<TabId, string> = {
 export const TAB_TITLES: Record<TabId, string> = {
   curriculum: 'Curriculum',
   weaponry: 'Field Weaponry',
-  scenarios: 'Scenario Lab',
+  battlecards: 'Battle Prep',
+  scenarios: 'Combat Arena',
   vault: 'Mastery Vault',
 };
 

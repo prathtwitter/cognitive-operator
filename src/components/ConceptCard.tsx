@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
-import { Bookmark, CheckCircle2, Copy, Check, ChevronRight, Zap, X } from 'lucide-react';
+import { Bookmark, CheckCircle2, Copy, Check, ChevronRight, Zap, Volume2, X } from 'lucide-react';
 import type { Concept } from '../types/curriculum';
 import { useUserProgress } from '../context/UserProgressContext';
 import { getSphereById } from '../data';
 import { copyText } from '../lib/clipboard';
+import { audioEngine } from '../utils/audioSpeech';
 
 interface ConceptCardProps {
   concept: Concept;
   onSelect: (concept: Concept) => void;
 }
 
-const DIFFICULTY_COLORS: Record<Concept['difficulty'], string> = {
-  Foundational: 'border-blue-500/30 bg-blue-950/40 text-blue-400',
-  Advanced: 'border-amber-500/30 bg-amber-950/40 text-amber-400',
-  Lethal: 'border-rose-500/30 bg-rose-950/40 text-rose-400',
-};
-
-const SPHERE_ACCENTS: Record<Concept['sphereId'], string> = {
-  'internal-architecture': 'border-cyan-500/20 hover:border-cyan-500/40',
-  'social-dynamics': 'border-purple-500/20 hover:border-purple-500/40',
-  'strategic-interactions': 'border-amber-500/20 hover:border-amber-500/40',
-  'behavioral-economics': 'border-emerald-500/20 hover:border-emerald-500/40',
+const DIFFICULTY_STYLES: Record<Concept['difficulty'], string> = {
+  Foundational: 'border-white/10 bg-white/[0.03] text-stone-300',
+  Advanced: 'border-[#c48b76]/30 bg-[#c48b76]/10 text-[#d4a38f]',
+  Lethal: 'border-rose-900/40 bg-rose-950/20 text-rose-300',
 };
 
 export const ConceptCard: React.FC<ConceptCardProps> = ({ concept, onSelect }) => {
@@ -42,28 +36,23 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept, onSelect }) =
   };
 
   return (
-    /*
-     * The card stays a plain container: clicking anywhere is a mouse convenience,
-     * while keyboard users get the real "Read Full Breakdown" button below. Making
-     * the whole card a button would illegally nest the bookmark/master controls.
-     */
     <div
       onClick={() => onSelect(concept)}
-      className={`group relative flex flex-col justify-between rounded-2xl border bg-[#11131a] p-4 sm:p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/50 cursor-pointer focus-within:ring-2 focus-within:ring-cyan-500/60 ${
-        completed ? 'border-zinc-800/80 opacity-90' : SPHERE_ACCENTS[concept.sphereId]
+      className={`group relative flex flex-col justify-between rounded-2xl border bg-[#0e0f14] p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/70 hover:border-white/25 cursor-pointer focus-within:ring-1 focus-within:ring-white/30 ${
+        completed ? 'border-white/5 opacity-85' : 'border-white/[0.08]'
       }`}
     >
       {/* Top Meta Bar */}
       <div>
-        <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="flex items-center justify-between gap-2 mb-3.5">
           <div className="flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-zinc-800/90 text-xs font-mono font-bold text-zinc-300">
+            <span className="flex h-6 px-1.5 items-center justify-center rounded-md bg-white/[0.05] border border-white/10 text-[11px] font-mono text-stone-300">
               #{String(concept.globalIndex).padStart(2, '0')}
             </span>
-            <span className={`rounded-md border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${sphere?.badgeColor}`}>
+            <span className="rounded-md border border-white/10 bg-white/[0.02] px-2 py-0.5 text-[10px] font-medium tracking-wide text-stone-300">
               Sphere {sphere?.number}
             </span>
-            <span className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${DIFFICULTY_COLORS[concept.difficulty]}`}>
+            <span className={`rounded-md border px-2 py-0.5 text-[10px] font-medium tracking-wide ${DIFFICULTY_STYLES[concept.difficulty]}`}>
               {concept.difficulty}
             </span>
           </div>
@@ -74,16 +63,28 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept, onSelect }) =
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
+                audioEngine.playConcept(concept);
+              }}
+              aria-label={`Listen to 90s audio briefing on ${concept.title}`}
+              className="rounded-lg p-1.5 text-stone-400 hover:text-white hover:bg-white/[0.06] transition-colors focus-visible:outline-none cursor-pointer"
+              title="Listen 90s audio briefing"
+            >
+              <Volume2 className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
                 toggleBookmark(concept.id);
               }}
               aria-pressed={bookmarked}
               aria-label={`${bookmarked ? 'Remove bookmark on' : 'Bookmark'} ${concept.title}`}
-              className={`rounded-lg p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 ${
-                bookmarked ? 'text-purple-400 bg-purple-950/50' : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50'
+              className={`rounded-lg p-1.5 transition-colors focus-visible:outline-none cursor-pointer ${
+                bookmarked ? 'text-[#c48b76] bg-[#c48b76]/15' : 'text-stone-400 hover:text-stone-200 hover:bg-white/[0.06]'
               }`}
-              title={bookmarked ? 'Bookmarked' : 'Bookmark concept'}
+              title={bookmarked ? 'Bookmarked' : 'Bookmark model'}
             >
-              <Bookmark className={`h-4 w-4 ${bookmarked ? 'fill-purple-400' : ''}`} />
+              <Bookmark className={`h-4 w-4 ${bookmarked ? 'fill-[#c48b76]' : ''}`} />
             </button>
             <button
               type="button"
@@ -93,34 +94,37 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept, onSelect }) =
               }}
               aria-pressed={completed}
               aria-label={`${completed ? 'Unmark' : 'Mark'} ${concept.title} as mastered`}
-              className={`rounded-lg p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 ${
-                completed ? 'text-cyan-400 bg-cyan-950/50' : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50'
+              className={`rounded-lg p-1.5 transition-colors focus-visible:outline-none cursor-pointer ${
+                completed ? 'text-emerald-400 bg-emerald-950/30' : 'text-stone-400 hover:text-stone-200 hover:bg-white/[0.06]'
               }`}
               title={completed ? 'Mastered' : 'Mark as mastered'}
             >
-              <CheckCircle2 className={`h-4 w-4 ${completed ? 'fill-cyan-400/20' : ''}`} />
+              <CheckCircle2 className={`h-4 w-4 ${completed ? 'fill-emerald-400/20' : ''}`} />
             </button>
           </div>
         </div>
 
-        {/* Title & Tagline */}
-        <h3 className="text-base sm:text-lg font-bold text-white tracking-tight leading-snug group-hover:text-cyan-300 transition-colors">
+        {/* Title & Tagline in Editorial Styling */}
+        <h3 className="font-serif text-xl sm:text-[1.35rem] font-normal text-white tracking-normal leading-snug group-hover:text-[#f4f4f6] transition-colors">
           {concept.title}
         </h3>
-        <p className="mt-1.5 text-xs sm:text-sm text-zinc-400 line-clamp-2 leading-relaxed">
+        <p className="mt-2 text-xs sm:text-sm text-stone-300 font-sans line-clamp-2 leading-relaxed">
           {concept.tagline}
         </p>
 
         {/* Plain-English Mental Model Analogy */}
-        <div className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg bg-cyan-950/30 border border-cyan-800/40 px-2 py-1 text-[11px] font-medium text-cyan-300">
-          <span className="text-amber-400" aria-hidden="true">💡</span>
+        <div className="mt-3 inline-flex items-center gap-2 rounded-xl bg-white/[0.04] border border-white/[0.08] px-3 py-1.5 text-xs font-normal text-stone-200">
+          <span className="text-[#c48b76]" aria-hidden="true">💡</span>
           <span className="truncate">{concept.plainEnglishAnalogy}</span>
         </div>
 
         {/* Thinkers Pills */}
-        <div className="mt-3 flex flex-wrap items-center gap-1.5">
+        <div className="mt-3.5 flex flex-wrap items-center gap-1.5">
           {concept.formalTerminology.keyThinkers.slice(0, 3).map((thinker, i) => (
-            <span key={i} className="rounded bg-zinc-900/80 px-2 py-0.5 text-[10px] font-medium text-zinc-400 border border-zinc-800/60">
+            <span
+              key={i}
+              className="rounded-full bg-white/[0.04] px-2.5 py-0.5 text-[11px] font-medium text-stone-300 border border-white/[0.08]"
+            >
               {thinker}
             </span>
           ))}
@@ -128,19 +132,19 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept, onSelect }) =
       </div>
 
       {/* Bottom Weapon Snippet Preview */}
-      <div className="mt-4 pt-3 border-t border-zinc-800/60">
+      <div className="mt-5 pt-3.5 border-t border-white/[0.06]">
         {primaryWeapon && (
-          <div className="rounded-xl bg-[#090a0f] p-2.5 border border-zinc-800/80">
-            <div className="flex items-center justify-between text-[11px] font-semibold text-amber-400 mb-1">
-              <span className="flex items-center gap-1">
+          <div className="rounded-xl bg-[#08080a] p-3 border border-white/[0.08]">
+            <div className="flex items-center justify-between text-xs font-semibold text-[#c48b76] mb-1.5">
+              <span className="flex items-center gap-1.5 text-[10px] font-mono tracking-wider uppercase">
                 <Zap className="h-3 w-3" />
-                Quick Weapon
+                Conversational Weapon
               </span>
               <button
                 type="button"
                 onClick={handleCopyWeapon}
-                className="flex items-center gap-1 text-[10px] font-medium text-zinc-400 hover:text-amber-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded"
-                aria-label={`Copy quick weapon for ${concept.title}`}
+                className="flex items-center gap-1 text-[11px] font-medium text-stone-400 hover:text-white transition-colors focus-visible:outline-none rounded cursor-pointer"
+                aria-label={`Copy weapon for ${concept.title}`}
                 title="Copy conversational phrase"
               >
                 {copyResult === 'ok' ? (
@@ -152,7 +156,7 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept, onSelect }) =
                 )}
               </button>
             </div>
-            <p className="text-[11px] text-zinc-300 italic line-clamp-2 font-mono leading-relaxed">
+            <p className="text-xs sm:text-[13px] text-stone-200 italic line-clamp-2 leading-relaxed font-serif">
               “{primaryWeapon.phrase}”
             </p>
           </div>
@@ -164,11 +168,11 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept, onSelect }) =
             e.stopPropagation();
             onSelect(concept);
           }}
-          className="mt-2.5 flex w-full items-center justify-between rounded-lg text-xs text-zinc-500 group-hover:text-zinc-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+          className="mt-3 flex w-full items-center justify-between text-xs text-stone-300 group-hover:text-white focus-visible:outline-none cursor-pointer"
           aria-label={`Read full breakdown of ${concept.title}`}
         >
-          <span className="text-[11px] font-medium">Read Full Breakdown</span>
-          <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+          <span className="text-xs font-medium tracking-wide">Read Full Analysis</span>
+          <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1 text-[#c48b76]" />
         </button>
       </div>
     </div>
